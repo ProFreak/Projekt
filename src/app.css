@@ -5,7 +5,7 @@
  * betreffen. Also solche Dinge wie Schriftart und Größe, Farben sowie das
  * Layout im Allgemeinen betreffend.
  */
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Be+Vietnam|Covered+By+Your+Grace|Julius+Sans+One|Rock+Salt|Special+Elite&display=swap');
 
 /*
  * ALLGEMEINES
@@ -19,7 +19,11 @@ html, body {
 }
 
 html {
-    font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Julius Sans One', sans-serif; /*gerade, groß*/
+  font-family: 'Covered By Your Grace', cursive; /* Hand klein*/
+  font-family: 'Rock Salt', cursive; /* Hand groß*/
+  font-family: 'Special Elite', cursive; /* Schreibmaschine*/
+  font-family: 'Be Vietnam', sans-serif /* allgemein*/
     font-size: 14pt;
     line-height: 1.6;
 
