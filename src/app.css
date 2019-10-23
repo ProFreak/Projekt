@@ -19,11 +19,10 @@ html, body {
 }
 
 html {
-  font-family: 'Julius Sans One', sans-serif; /*gerade, groß*/
-  font-family: 'Covered By Your Grace', cursive; /* Hand klein*/
-  font-family: 'Rock Salt', cursive; /* Hand groß*/
-  font-family: 'Special Elite', cursive; /* Schreibmaschine*/
-  font-family: 'Be Vietnam', sans-serif /* allgemein*/
+    font-family: 'Covered By Your Grace', cursive; /* Hand klein*/
+    font-family: 'Rock Salt', cursive; /* Hand groß*/
+    font-family: 'Special Elite', cursive; /* Schreibmaschine*/
+    font-family: 'Be Vietnam', sans-serif /* allgemein*/
     font-size: 14pt;
     line-height: 1.6;
 
@@ -73,6 +72,11 @@ header {
     --text-color: white;
     --icon-color: rgb(0, 90, 115);
     background: rgba(240,240,240, 0.15)
+}
+header h1 {
+  color: white;
+  text-align: center;
+  font-family: 'Julius Sans One', sans-serif; /*gerade, groß*/
 }
 header nav {
     padding: var(--content-padding);
