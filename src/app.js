@@ -31,7 +31,6 @@ class App {
         this._title = title;
         this._pages = pages;
         this._currentPageObject = null;
-<<<<<<< HEAD
 
         // Datenbank-Objekt zum Lesen und Speichern von Daten
         this.database = new Database();
@@ -201,78 +200,6 @@ class App {
         }
 
         // Gewünschte Seite suchen und aufrufen
-=======
-
-        // Datenbank-Objekt zum Lesen und Speichern von Daten
-        this.database = new Database();
-    }
-
-    /**
-     * Startmethode der App. Hier werden die Event Listener für das generelle
-     * Funktionieren der App registriert. Diese Methode muss daher aus der
-     * index.html heraus aufgerufen werden.
-     */
-    run() {
-        // Globale Event Listener registrieren
-        document.querySelector("header nav .toggle-menu a").addEventListener("click", this._toggleHamburgerMenu);
-        document.querySelector("header nav .go-back a").addEventListener("click", () => window.history.back());
-
-        // Single Page Router starten und die erste Seite aufrufen
-        window.addEventListener("hashchange", () => this._handleRouting());
-        this._handleRouting();
-    }
-
-    /**
-     * Hilfsmethode zum Ein- und Ausblenden des Hamburger-Menüs aus kleinen
-     * Bildschirmen. Die Methode wird durch einen Event Handler bei jedem
-     * Klick auf das Hamburger-Icon aufgerufen.
-     *
-     * @param {DOMEvent} event Abgefangenes Click-Event
-     */
-    _toggleHamburgerMenu(event) {
-        // Hamburger-Menu ein- oder ausblenden
-        let menu = document.querySelector("header nav .menu-right");
-        if (!menu) return;
-
-        if (menu.classList.contains("small-screen-hidden")) {
-            menu.classList.remove("small-screen-hidden");
-        } else {
-            menu.classList.add("small-screen-hidden");
-        }
-
-        // Weitere Behandlung des Click-Events unterbinden, da wir hier keine
-        // neue Seite anfordern wollen.
-        if (event) {
-            event.preventDefault();
-        }
-    }
-
-    /**
-     * Diese Methode wertet die aktuelle URL aus und sorgt dafür, dass die
-     * dazu passende App-Seite geladen und angezeigt wird. Der Einfachheit
-     * halber wird eine sog. Hash-URL verwendet, bei der die aufzurufende
-     * Seite nach einem #-Zeichen stehen muss. Zum Beispiel:
-     *
-     *   http://localhost:8080/index.html#/Detail/1234
-     *
-     * Hier beschreibt "/Detail/1234" den Teil der URL mit der darzustellenden
-     * Seite. Der Vorteil dieser Technik besteht darin, dass ein Link mit einer
-     * solchen URL keine neue Seite vom Server lädt, wenn sich der vordere Teil
-     * der URL (alles vor dem #-Zeichen) nicht verändert. Stattdessen wird
-     * ein "hashchange"-Ereignis generiert, auf das wir hier reagieren können,
-     * um die sichtbare Unterseite der App auszutauschen.
-     *
-     * Auf Basis der History-API und dem "popstate"-Ereignis lässt sich ein
-     * noch ausgefeilterer Single Page Router entwickeln, der bei Bedarf auch
-     * ohne das #-Zeichen in der URL auskommt. Dies würde jedoch sowohl mehr
-     * Quellcode in JavaScript sowie eine spezielle Server-Konfiguration
-     * erfordern, so dass der Server bei jeder URL immer die gleiche HTML-Seite
-     * an den Browser schickt. Diesen Aufwand sparen wir uns deshalb hier. :-)
-     */
-    _handleRouting() {
-        let pageUrl = location.hash.slice(1);
-
->>>>>>> c39e66b586c77b8f9dfb0dc02d1d7ffcdd601cbc
         if (pageUrl.length === 0) {
             pageUrl = "/";
         }
@@ -341,7 +268,6 @@ class App {
     setPageCss(css) {
         document.querySelector("#page-css").innerHTML = css;
     }
-<<<<<<< HEAD
 
     /**
     * Austauschen des Inhalts im Kopfbereich der App. Diese Methode muss
@@ -387,53 +313,6 @@ class App {
         let container = document.querySelector("#app-main-area");
         container.innerHTML = "";
 
-=======
-
-    /**
-    * Austauschen des Inhalts im Kopfbereich der App. Diese Methode muss
-    * von den Page-Klassen aufgerufen werden, um etwas im Kopfbereich der
-    * App anzuzeigen. Hierfür muss ein (ggf. dynamisch nachgeladenes)
-    * HTML-Element mit dem anzuzeigenden Inhalt übergeben werden.
-    *
-    * BEACHTE: Nicht das HTML-Element selbst, sondern seine Kindelemente
-    * werden in der App angezeigt. Somit werden Probleme vermieden, wenn
-    * das nachgeladene Element selbst ein <header> oder <main> ist, für
-    * dass in der app.css bereits globale Layoutoptionen definiert sind.
-    *
-     * @param {HTMLElement} element HTML-Element mit dem anzuzeigenden Inhalt
-     */
-    setPageHeader(element) {
-        let container = document.querySelector("header > .content");
-        container.innerHTML = "";
-
-        if (!element) return;
-        let len = element.childNodes.length;
-
-        for (var i = 0; i < len; i++) {
-            let child = element.childNodes[0];
-            element.removeChild(child);
-            container.appendChild(child);
-        }
-    }
-
-    /**
-     * Austauschen des Inhalts im Hauptbereich der App. Diese Methode muss
-     * von den Page-Klassen aufgerufen werden, um etwas im Hauptbereich der
-     * App anzuzeigen. Hierfür muss ein (ggf. dynamisch nachgeladenes)
-     * HTML-Element mit dem anzuzeigenden Inhalt übergeben werden.
-     *
-     * BEACHTE: Nicht das HTML-Element selbst, sondern seine Kindelemente
-     * werden in der App angezeigt. Somit werden Probleme vermieden, wenn
-     * das nachgeladene Element selbst ein <header> oder <main> ist, für
-     * dass in der app.css bereits globale Layoutoptionen definiert sind.
-     *
-     * @param {HTMLElement} element HTML-Element mit dem anzuzeigenden Inhalt
-     */
-    setPageContent(element) {
-        let container = document.querySelector("#app-main-area");
-        container.innerHTML = "";
-
->>>>>>> c39e66b586c77b8f9dfb0dc02d1d7ffcdd601cbc
         if (!element) return;
         let len = element.childNodes.length;
 
