@@ -5,7 +5,7 @@
  * betreffen. Also solche Dinge wie Schriftart und Größe, Farben sowie das
  * Layout im Allgemeinen betreffend.
  */
-@import url('https://fonts.googleapis.com/css?family=Rubik');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 
 /*
  * ALLGEMEINES
@@ -19,7 +19,7 @@ html, body {
 }
 
 html {
-    font-family: "Rubik", sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
     font-size: 14pt;
     line-height: 1.6;
 
