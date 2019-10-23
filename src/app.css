@@ -139,7 +139,7 @@ header .content {
     background: rgba(240,240,240, 0.0);
     border: 0px solid lightgrey;
     border-bottom-width: 0px;
-    box-shadow: 1px 1px 2px rgba(0,0,0, 0.9);
+    box-shadow: 1px 1px 2px rgba(0,0,0, 0.0);
 }
 
 header .content h1,
