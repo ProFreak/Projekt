@@ -69,6 +69,7 @@ body {
 header {
     --text-color: white;
     --icon-color: rgb(0, 90, 115);
+    background: rgba(240,240,240, 0.15)
 }
 header nav {
     padding: var(--content-padding);
@@ -136,9 +137,9 @@ header nav .menu-left li {
 header .content {
     padding: var(--content-padding);
 
-    background: white;
+    background: rgba(240,240,240, 0.0);
     border: 0px solid lightgrey;
-    border-bottom-width: 1px;
+    border-bottom-width: 0px;
     box-shadow: 1px 1px 2px rgba(0,0,0, 0.9);
 }
 
@@ -206,7 +207,7 @@ header .content h6 {
  */
 main {
     padding: var(--content-padding);
-    background: rgba(240,240,240, 0.9);
+    background: rgba(240,240,240, 0.15);
     flex: 1;
 }
 
