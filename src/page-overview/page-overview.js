@@ -24,7 +24,11 @@ class PageOverview {
             html = await html.text();
             css = await css.text();
         } else {
+<<<<<<< HEAD
             console.error("Fehler beim Laden des HTML/CSS-Inhalts")
+=======
+            console.error("Fehler beim Laden des HTML/CSS-Inhalts");
+>>>>>>> c39e66b586c77b8f9dfb0dc02d1d7ffcdd601cbc
             return;
         }
 
