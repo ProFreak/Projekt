@@ -2,24 +2,22 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Aufgabe: Meine App</title>
+        <title>Lösung: Meine App</title>
         <link rel="shortcut icon" href="favicon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 
         <!-- Klasse App: Steuert die gesamte Anwendung -->
+        <script src="app.js"></script>
         <link rel="stylesheet" href="app.css" />
 
         <!-- Klasse Database: Verwaltet die Daten der Anwendung -->
         <script src="database.js"></script>
-        <script src="app.js"></script>
 
-        <!-- TODO: Klasse App ausprogrammieren -->
-        <!-- TODO: Klasse PageNotFound anlegen und ausprogrammieren -->
-        <!-- TODO: Klasse PageOverview zu Ende programmieren -->
-        <!-- TODO: Klasse PageDetail zu Ende programmieren -->
-
+        <!-- Klassen für die einzelnen App-Seiten -->
         <script src="page-overview/page-overview.js"></script>
         <script src="page-detail/page-detail.js"></script>
         <script src="page-not-found/page-not-found.js"></script>
+
         <!-- Fontello Icon Font (generiert auf fontello.com) -->
         <link rel="stylesheet" href="fontello/css/fontello.css" />
 
@@ -28,24 +26,27 @@
         <link rel="stylesheet" href="elements/tab-buttons.css" />
         <link rel="stylesheet" href="elements/form.css" />
 
+        <!-- Anwendung starten -->
         <script>
-        // Warten bis die Seite fertig geladen wurde
-        window.addEventListener("load", ()=>{
-            let pages = [{
-                url:"^/$",              // ^= nichts am Anfang; $ = nichts am ende
-                klass: PageOverview,
-            },{
-                url:"/Detail/(.*)$",
-                klass: PageDetail,
-            },{
-                url:".*",               // .= Beliebiges Zeichen, *= 0 bis n mal
-                klass: PageNotFound,
-            }];
-            let app = new App("Segelbootkatalog", pages);
-            app.run();
-        });
+            window.addEventListener("load", () => {
+                let pages = [{
+                    url: "^/$",
+                    klass: PageOverview,
+                },{
+                    url: "^/Detail/(.*)$",
+                    klass: PageDetail,
+                },{
+                    url: ".*",
+                    klass: PageNotFound,
+                }];
 
+                let app = new App("Segelfreunde", pages);
+                app.run();
+            });
         </script>
+
+        <!-- Dummy-Element für dynamisch nachgeladene CSS-Regeln -->
+        <style id="page-css"></style>
     </head>
     <body>
         <!-- Kopfbereich der App -->
@@ -72,24 +73,19 @@
                 </ul>
 
                 <!-- Übergreifendes App-Menü -->
-
                 <ul class="menu-right small-screen-hidden">
                     <li>
                         <a href="#/messages">
                             <i class="icon-chat-empty"></i>
-                            <span class="small-screen-only">
-                            Benachrichtigungen</span>
+                            <span class="small-screen-only">Benachrichtigungen</span>
                         </a>
                     </li>
                     <li>
                         <a href="#/profile">
                             <i class="icon-user"></i>
-                            <span class="small-screen-only">
-                                Benutzerprofil
-                            </span>
+                            <span class="small-screen-only">Benutzerprofil</span>
                         </a>
                     </li>
-                    <!-- TODO: Inhalte definieren -->
                 </ul>
             </nav>
 
