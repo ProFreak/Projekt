@@ -152,7 +152,7 @@ header .content h6 {
 }
 
 header .content h1 {
-    color: rgb(37, 88, 148);
+    color: white;
     text-shadow: 1px 1px 1px rgba(0,0,0, 0.2);
     font-size: 150%;
 }
