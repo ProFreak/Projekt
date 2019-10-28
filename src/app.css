@@ -70,7 +70,7 @@ body {
 /* Allgemeine Darstellung der Menüzeile */
 header {
     --text-color: white;
-    --icon-color: rgb(0, 90, 115);
+    --icon-color: rgb(255, 255, 255);
     background: rgba(240,240,240, 0.15)
 }
 header h1 {
