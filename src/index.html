@@ -42,6 +42,9 @@
 
                 let app = new App("Segelfreunde", pages);
                 app.run();
+
+                //nur zum Test
+                document.getElementById("erstellen").showModal();
             });
         </script>
 
@@ -49,6 +52,14 @@
         <style id="page-css"></style>
     </head>
     <body>
+        <!-- Dialog platzhalter für verscheidene Funktionen -->
+        <dialog id="erstellen" class="dialog-container">
+            <div id="dialog-erstellen" class="dialog-erstellen">
+                <form>
+                    Hallo
+                </form>
+            </div>
+        </dialog>
         <!-- Kopfbereich der App -->
         <header
           <img class="logo" src="icon.png" alt="Logo" />

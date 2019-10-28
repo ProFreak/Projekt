@@ -228,3 +228,23 @@ main a:visited {
 main a:hover {
     color: red;
 }
+
+/*
+*   Dialog
+*/
+
+body .dialog-container{
+    width: inherit;
+    height: inherit;
+    background: rgba(37, 34, 34, 0.9);
+    border: none;
+}
+
+.dialog-erstellen{
+    float: left;
+    width: 80%;
+    margin-left: 10%;
+    background: white;
+    border-radius: 15px;
+    padding: 10px;
+}

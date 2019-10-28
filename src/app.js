@@ -223,4 +223,9 @@ class App {
             container.appendChild(child);
         }
     }
+
+    setDialogContent(content){
+        let dialog = document.getElementById("dialog");
+        dialog.innerHTML = content;
+    }
 }
