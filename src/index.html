@@ -43,9 +43,25 @@
                 let app = new App("Segelfreunde", pages);
                 app.run();
 
+                //Modal schließen
+                let modal = document.getElementById("modal");
+                let close = document.getElementById("close-modal");
+
+                close.onclick = function() {
+                    app.closeModal();
+                };
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        app.closeModal();
+                    }
+                };
+
                 //nur zum Test
-                document.getElementById("erstellen").showModal();
+                app.setModalContent("erstellen");
             });
+
+
         </script>
 
         <!-- Dummy-Element für dynamisch nachgeladene CSS-Regeln -->
@@ -53,13 +69,21 @@
     </head>
     <body>
         <!-- Dialog platzhalter für verscheidene Funktionen -->
-        <dialog id="erstellen" class="dialog-container">
-            <div id="dialog-erstellen" class="dialog-erstellen">
-                <form>
-                    Hallo
-                </form>
-            </div>
-        </dialog>
+        <div id="modal" class="modal-container">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <span class="close" id="close-modal">&times;</span>
+                  <h2 id="modal-headline">Modal Header</h2>
+                </div>
+                <div class="modal-body" id="modal-body">
+                  <p>Some text in the Modal Body</p>
+                  <p>Some other text...</p>
+                </div>
+                <div class="modal-footer" id="modal-footer">
+                  <h3>Modal Footer</h3>
+                </div>
+              </div>
+        </div>
         <!-- Kopfbereich der App -->
         <header
           <img class="logo" src="icon.png" alt="Logo" />

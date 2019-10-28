@@ -224,8 +224,46 @@ class App {
         }
     }
 
-    setDialogContent(content){
-        let dialog = document.getElementById("dialog");
-        dialog.innerHTML = content;
+    setModalContent(trigger){
+        //Dialogfenster als variablen ablegen
+        let modal = document.getElementById("modal");
+        let headline = document.getElementById("modal-headline");
+        let modalBody = document.getElementById("modal-body");
+        let modalFooter = document.getElementById("modal-footer");
+
+        //Close-Button
+        let close = document.getElementsByClassName("close")[0];
+
+        //Content auswählen, je nachdem ob "erstellen" oder "detail"
+        if(trigger == "erstellen"){
+            modal.classList.add("erstellen");
+            headline.textContent = "Neues Rezept";
+
+        } else {
+
+        }
+
+
+        //Dialogfenster öffnen
+        modal.style.display = "block";
+    }
+
+    closeModal(){
+        let modal = document.getElementById("modal");
+        //Tyypcheck und Doppelte Schließ-Frage!!!
+        if(modal.classList.contains("erstellen")){
+            if (confirm('Sind Sie sicher, dass Sie das erstellen abbrechen wollen? Ihr Rezept geht verloren!')) {
+                //DB Handling um neues Rezept anzulegen!
+                modal.style.display = "none";
+            }
+        } else {
+            modal.style.display = "none";
+        }
+
+        
+    }
+
+    modalSubmit(){
+
     }
 }
