@@ -34,7 +34,7 @@ class PageOverview {
 
         this._renderBoatTiles(pageDom);
 
-        this._app.setPageTitle("Startseite");
+        this._app.setPageTitle("Mein Rezeptbuch");
         this._app.setPageCss(css);
         this._app.setPageHeader(pageDom.querySelector("header"));
         this._app.setPageContent(pageDom.querySelector("main"));
