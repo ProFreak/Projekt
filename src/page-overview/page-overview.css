@@ -15,8 +15,8 @@
 }
 
 .tile img {
-    width: 20em;
-    height: 20em;
+    width: 10em;
+    height: 10em;
     max-width: 100%;
     object-fit: cover;
     display: block;
@@ -30,6 +30,6 @@
 
 .tile:hover {
     background: white;
-    transform: scale(1.01) rotate(0.5deg);
+    transform: scale(1.01) ;
     cursor: pointer;
 }
