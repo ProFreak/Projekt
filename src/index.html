@@ -6,6 +6,10 @@
         <link rel="shortcut icon" href="icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 
+        <!-- Google Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-firestore.js"></script>
+
         <!-- Klasse App: Steuert die gesamte Anwendung -->
         <script src="app.js"></script>
         <link rel="stylesheet" href="app.css" />
@@ -43,6 +47,13 @@
                 let app = new App("Segelfreunde", pages);
                 app.run();
             });
+            
+            //noch unklar
+            async function reloadData() {
+                  deletedIds = [];
+                  let rezepte = await database.selectAllRezepte();
+                  table.replaceData(rezepte);
+              }
         </script>
 
         <!-- Dummy-Element für dynamisch nachgeladene CSS-Regeln -->
