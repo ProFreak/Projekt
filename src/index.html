@@ -40,7 +40,7 @@
                     klass: PageNotFound,
                 }];
 
-                let app = new App("Segelfreunde", pages);
+                let app = new App("Rezepte", pages);
                 app.run();
             });
         </script>
@@ -76,15 +76,21 @@
                 <!-- Übergreifendes App-Menü -->
                 <ul class="menu-right small-screen-hidden">
                     <li>
-                        <a href="#/messages">
-                            <i class="icon-chat-empty"></i>
-                            <span class="small-screen-only">Benachrichtigungen</span>
+                        <a href="#/search">
+                            <i class="icon-search"></i>
+                            <span class="small-screen-only">Suchen</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#/profile">
-                            <i class="icon-user"></i>
-                            <span class="small-screen-only">Benutzerprofil</span>
+                        <a href="#/favoriten">
+                            <i class="icon-heart"></i>
+                            <span class="small-screen-only">Favoriten</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#/add">
+                            <i class="icon-plus"></i>
+                            <span class="small-screen-only">Erstellen</span>
                         </a>
                     </li>
                 </ul>
