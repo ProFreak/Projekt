@@ -50,7 +50,7 @@ class PageOverview {
     _renderBoatTiles(pageDom) {
         let mainElement = pageDom.querySelector("main");
         let templateElement = pageDom.querySelector("#template-tile");
-
+        /*
         this._app.database.getAllRecords().forEach(boat => {
             let html = templateElement.innerHTML;
             html = html.replace("{HREF}", `#/Detail/${boat.id}`);
@@ -59,5 +59,6 @@ class PageOverview {
 
             mainElement.innerHTML += html;
         });
+        */
     }
 }
