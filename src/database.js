@@ -87,6 +87,17 @@ class Database {
       });
     }
 
+    /*
+    * Rezept durch ID finden
+    */
+    getRecipesById(id){
+      // "Schleife", die im Array nach der id sucht
+      return this._recipes.find( a => {
+        // 1:1 Vergleich des Inhalts von der gesuchten id
+        return a.id === id;
+      });
+    }
+
 
 
     /*
