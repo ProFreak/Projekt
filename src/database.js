@@ -79,23 +79,39 @@ class Database {
     /*
     * Rezept durch Namen finden
     */
-    getRecipesByName(titel){
-      // "Schleife", die im Array nach dem Titel sucht
-      return this._recipes.find( a => {
-        // 1:1 Vergleich des Inhalts vom gesuchten Titel
-        return a.titel === titel;
-      });
+    getRecipeByName(titel) {
+        // "Schleife", die im Array nach dem Titel sucht
+        return this._recipes.find(a => {
+            // 1:1 Vergleich des Inhalts vom gesuchten Titel
+            return a.titel === titel;
+        });
     }
 
     /*
     * Rezept durch ID finden
     */
-    getRecipesById(id){
-      // "Schleife", die im Array nach der id sucht
-      return this._recipes.find( a => {
-        // 1:1 Vergleich des Inhalts von der gesuchten id
-        return a.id === id;
-      });
+    getRecipeById(id) {
+        let tmp = {
+            anleitung: "Nudeln kochen und die Soße zubereiten",
+            favorit: true,
+            id: "02wWY3Jx08cKAzR1abX5",
+            titel: "Spaghetti Bolognese",
+            zutaten: [
+                "1kg Rinderhackfleisch", "3 Knoblauchzehen", "3 Karotten", "3 Stangen Staudensellerie", "2 Zwiebeln", "600g Dosentomaten", "600g Spaghetti", "125g Butter", "500ml Milch",
+                "3 Peperoncini",
+                "Meersalz",
+                "Pfeffer",
+                "Olivenöl",
+                "Weißwein"
+            ],
+            portionen: "5",
+            zubereitungszeit: "00:20",
+            ruhezeit: "02:30",
+            bild: ""
+        }
+
+        return tmp;
+
     }
 
 
