@@ -76,19 +76,30 @@ class Database {
         this._db.collection('rezepte').doc(id).update(update);
     }
 
+    /*
+    * Rezept durch Namen finden
+    */
+    getRecipesByName(titel){
+      // "Schleife", die im Array nach dem Titel sucht
+      return this._recipes.find( a => {
+        // 1:1 Vergleich des Inhalts vom gesuchten Titel
+        return a.titel === titel;
+      });
+    }
+
 
 
     /*
     *   Sortiert Strings alphabetisch mit Hilfe von regulären Ausdrücken
     *   Zusammenhängender Text > Selber Text mit Leerzeichen
     *   Großgeschrieben > Kleingeschrieben
-    *   Text mit Index > reiner Text 
-    * 
+    *   Text mit Index > reiner Text
+    *
     *  Von StackOverflow entnommen!
     *  Originale Frage von: https://stackoverflow.com/users/317036/solefald
     *  Frage: https://stackoverflow.com/questions/4340227/sort-mixed-alpha-numeric-array
     *  Antwort und unten stehender Code von: https://stackoverflow.com/users/14104/epascarello
-    * 
+    *
     *  @Author: David Tenten
     *  Leerzeichen zu regulären Ausdrücken hinzugefügt
     *  Kommentare
