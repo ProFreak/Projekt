@@ -94,8 +94,6 @@ class Database {
     *  Kommentare
     */
     _sortAlphaNum(a, b) {
-        console.log("Aufruf");
-
         //Regulaere Ausdruecke für Alphabeth (Groß- & Kleinschreibung) und Ziffern/Dezimalzahlen
         let reA = /[^a-zA-Z\s]/g;
         let reN = /[^0-9]/g;
