@@ -9,6 +9,7 @@
  * Klassen bereitgestellt wird.
  */
 class App {
+  
     /**
      * Konstruktor. Im Parameter pages muss eine Liste mit den vorhandenen
      * Seiten der App übergeben werden. Die Liste muss folgendes Format haben:

@@ -31,6 +31,8 @@ class Database {
 
         //Klassenvariable für alle Rezepte
         this._recipes = this.getAllRecipes();
+
+        //console.log(getRecipesById("02wWY3Jx08cKAzR1abX5"));
     }
 
     /*
@@ -78,7 +80,6 @@ class Database {
 
     /*
     * Rezept durch Namen finden
-    */
     getRecipesByName(titel){
       // "Schleife", die im Array nach dem Titel sucht
       return this._recipes.find( a => {
@@ -86,17 +87,22 @@ class Database {
         return a.titel === titel;
       });
     }
+    */
+
 
     /*
     * Rezept durch ID finden
-    */
     getRecipesById(id){
-      // "Schleife", die im Array nach der id sucht
-      return this._recipes.find( a => {
-        // 1:1 Vergleich des Inhalts von der gesuchten id
-        return a.id === id;
+      this._recipes.forEach(this._recipes => {
+        if (this._recipes.id === id) {
+          return this._recipes.id;
+        } else {
+          alert("Es wurde kein Rezept mit dieser ID gefunden!");
+        }
       });
     }
+    */
+
 
 
 
