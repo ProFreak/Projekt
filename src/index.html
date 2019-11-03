@@ -46,6 +46,23 @@
 
                 let app = new App("Segelfreunde", pages);
                 app.run();
+
+                //Modal schließen
+                let modal = document.getElementById("modal");
+                let close = document.getElementById("close-modal");
+
+                close.onclick = function() {
+                    app.closeModal();
+                };
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        app.closeModal();
+                    }
+                };
+
+                //nur zum Test
+                app.setModalContent("02wWY3Jx08cKAzR1abX5");
             });
             
             //noch unklar
@@ -60,6 +77,22 @@
         <style id="page-css"></style>
     </head>
     <body>
+        <!-- Dialog platzhalter für verscheidene Funktionen -->
+        <div id="modal" class="modal-container">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <span class="close" id="close-modal">&times;</span>
+                  <h2 id="modal-headline">Modal Header</h2>
+                </div>
+                <hr>
+                <div class="modal-body" id="modal-body">
+                  
+                </div>
+                <hr>
+                <div class="modal-footer" id="modal-footer">
+                </div>
+              </div>
+        </div>
         <!-- Kopfbereich der App -->
         <header
           <img class="logo" src="icon.png" alt="Logo" />
