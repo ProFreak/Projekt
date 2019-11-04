@@ -318,6 +318,15 @@ body .modal-container{
   padding-left: 10px;
 }
 
+/*
+* unterer Dialogbereich
+* Anleitung
+*/
+.modalLowerContent{
+  margin: 40px;
+  margin-top: 0px;
+}
+
 /* Schließen-Knopf */
 .close {
     color: #aaa;
