@@ -6,6 +6,7 @@
  * Layout im Allgemeinen betreffend.
  */
 @import url('https://fonts.googleapis.com/css?family=Be+Vietnam|Covered+By+Your+Grace|Julius+Sans+One|Rock+Salt|Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
 /*
  * ALLGEMEINES
@@ -23,6 +24,8 @@ html {
     font-family: 'Rock Salt', cursive; /* Hand groß*/
     font-family: 'Special Elite', cursive; /* Schreibmaschine*/
     font-family: 'Be Vietnam', sans-serif ;/* allgemein*/
+    font-family: 'Julius Sans One', sans-serif; /*gerade, groß*/
+    font-family: 'Quicksand', sans-serif; /*allgemein gerade*/
     font-size: 14pt;
     line-height: 1.6;
 
@@ -256,6 +259,63 @@ body .modal-container{
     border-radius: 15px;
     padding-left: 5px;
     padding-right: 5px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+/*
+* Dialogfenster oberer Bereich
+* Bild, Zutatenliste, Portionen, Zubereitungszeit
+*/
+.modalUpperContent{
+  font-size: 24px;
+  display: flex;
+  flex-direction: row;
+}
+#modal-headline{
+  font-family: 'Rock Salt', cursive;
+}
+
+/*
+* Dialogfenster oberer Bereich links
+* Bild
+*/
+.modalUpperContentLeft{
+  float: left;
+  width: 40%;
+  height: 100%;
+}
+
+/*
+* Dialogfenster oberer Bereich Rechts
+* Zubereitungsliste, Portionen, Zeit, Dauer
+*/
+.modalUpperContentRight{
+
+}
+
+.modalUpperContentRight li{
+  list-style: none;
+  margin: auto;
+  list-style-type: "- ";
+}
+
+/*
+* Dialogfenster oberer Bereich links
+* Portionen, Zubereitungszeit, Dauer
+*/
+.modal-right-header{
+  font-family: 'Covered By Your Grace', cursive;
+  float: right;
+}
+
+.modal-right-header li{
+  float: left;
+  list-style: none;
+  padding-right: 30px;
+}
+
+.modal-right-header ul{
+  padding-left: 10px;
 }
 
 /* Schließen-Knopf */
@@ -265,7 +325,7 @@ body .modal-container{
     font-size: 28px;
     font-weight: bold;
   }
-  
+
   .close:hover,
   .close:focus {
     color: black;
@@ -275,5 +335,5 @@ body .modal-container{
 
 /* Modal erstellen */
 .erstellen{
-    
+
 }
