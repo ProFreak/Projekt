@@ -7,6 +7,7 @@
  */
 @import url('https://fonts.googleapis.com/css?family=Be+Vietnam|Covered+By+Your+Grace|Julius+Sans+One|Rock+Salt|Special+Elite&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
 
 /*
  * ALLGEMEINES
@@ -26,6 +27,7 @@ html {
     font-family: 'Be Vietnam', sans-serif ;/* allgemein*/
     font-family: 'Julius Sans One', sans-serif; /*gerade, groß*/
     font-family: 'Quicksand', sans-serif; /*allgemein gerade*/
+    font-family: 'Indie Flower', cursive; /* Hand deutlich*/
     font-size: 14pt;
     line-height: 1.6;
 
@@ -311,14 +313,14 @@ body .modal-container{
     margin-left: auto; /* zentrierung */
     margin-right: auto;
     background: white;
-    border-radius: 15px;
+    border-radius: 3px;
     font-family: 'Quicksand', sans-serif;
     padding-left: 7px;
     padding-right: 7px;
 }
 
 #modal-headline{
-  font-family: 'Rock Salt', cursive;
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 /*

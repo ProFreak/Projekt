@@ -353,7 +353,6 @@ class App {
             //#############
         }
 
-
         //Dialogfenster öffnen
         modal.style.display = "block";
     }
