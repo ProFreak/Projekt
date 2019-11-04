@@ -331,17 +331,19 @@ body .modal-container{
   width: 100%;
 }
 
+.modalUpperContentRight li{
+  list-style: none;
+  margin: auto;
+  list-style-type: "- ";
+}
+
 .modal-right-header li{
   float: left;
   list-style: none;
   padding-right: 10px;
 }
 
-.modalUpperContentRight li{
-  list-style: none;
-  margin: auto;
-  list-style-type: "- ";
-}
+
 
 /* Schließen-Knopf */
 .close {
