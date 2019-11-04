@@ -308,6 +308,13 @@ class App {
                 nodeURList.appendChild(restLi);
             }
 
+            //Favoriten-Icon
+            let favLi = document.createElement("LI");
+            let favIco = document.createElement("I");
+            favIco.setAttribute("class", "icon-user");
+            favLi.appendChild(favIco);
+            nodeURList.appendChild(favLi);
+
             //Zutatenliste hinzufügen
             let nodeIngedients = document.createElement("UL");
             recipe.zutaten.forEach(x => {
@@ -333,11 +340,6 @@ class App {
             modalBody.appendChild(nodeLContent);
 
             //#############
-            //Modal footer
-            let footerIco = document.createElement("I");
-            footerIco.setAttribute("class", "icon-user");
-
-            modalFooter.appendChild(footerIco);
         }
 
 
