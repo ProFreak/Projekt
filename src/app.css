@@ -308,8 +308,9 @@ body .modal-container{
 
 /* Inhaltsbereich des Dialogfensters */
 .modal-content{
-    width: 95%;
+    width: 85%;
     margin: 2%;
+    margin-top: 4%;
     margin-left: auto; /* zentrierung */
     margin-right: auto;
     background: white;
