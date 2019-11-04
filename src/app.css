@@ -258,6 +258,42 @@ body .modal-container{
     padding-right: 5px;
 }
 
+/*
+* Dialogfenster oberer Bereich
+* Bild, Zutatenliste, Portionen, Zubereitungszeit
+*/
+.modalUpperContent{
+  font-family: 'Be Vietnam', sans-serif;
+  font-size: 24px;
+}
+
+/*
+* Dialogfenster oberer Bereich links
+* Bild
+*/
+.modalUpperContentLeft{
+  float: left;
+}
+
+/*
+* Dialogfenster oberer Bereich links
+* Portionen, Zubereitungszeit, Dauer
+*/
+.modal-right-header{
+  font-family: 'Covered By Your Grace', cursive;
+  float: right;
+}
+
+.modal-right-header li{
+  float: left;
+  list-style: none;
+  padding-right: 30px;
+}
+
+.modal-right-header ul{
+  padding-left: 10px;
+}
+
 /* Schließen-Knopf */
 .close {
     color: #aaa;
@@ -265,7 +301,7 @@ body .modal-container{
     font-size: 28px;
     font-weight: bold;
   }
-  
+
   .close:hover,
   .close:focus {
     color: black;
@@ -275,5 +311,5 @@ body .modal-container{
 
 /* Modal erstellen */
 .erstellen{
-    
+
 }

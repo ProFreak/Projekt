@@ -93,7 +93,7 @@ class Database {
     /*
     * Rezept durch ID finden
     */
-    /*
+
     getRecipeById(id) {
         let tmp = {
             anleitung: "Nudeln kochen und die Soße zubereiten",
@@ -117,7 +117,7 @@ class Database {
         return tmp;
 
     }
-    */
+    
 
     /*
     *   Sortiert Strings alphabetisch mit Hilfe von regulären Ausdrücken
