@@ -72,7 +72,8 @@ class Database {
     /*
     *   Updatet das Dokument mit der entsprechenden ID
     *   update beschreibt ein JSON-Dokument mit den zu aktualisierenden Feldern und deren neuen Werten
-    *   !!!Vorsicht bei geschachtelten Feldern! (Felder, deren Wert wieder ein JSON ist.) Hier muss' Feld.Unterfeld: Value ' übergeben werden und NICHT ein einfaches JSON
+    *   !!!Vorsicht bei geschachtelten Feldern! (Felder, deren Wert wieder ein JSON ist.) Hier muss
+    *  ' Feld.Unterfeld: Value ' übergeben werden und NICHT ein einfaches JSON
     */
     updateRecipe(id, update) {
         this._db.collection('rezepte').doc(id).update(update);
@@ -88,12 +89,11 @@ class Database {
             return a.titel === titel;
         });
     }
-    */
-
 
     /*
     * Rezept durch ID finden
     */
+    /*
     getRecipeById(id) {
         let tmp = {
             anleitung: "Nudeln kochen und die Soße zubereiten",
@@ -118,9 +118,6 @@ class Database {
 
     }
     */
-
-
-
 
     /*
     *   Sortiert Strings alphabetisch mit Hilfe von regulären Ausdrücken
