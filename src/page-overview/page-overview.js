@@ -10,6 +10,7 @@ class PageOverview {
      */
     constructor(app) {
         this._app = app;
+        this._slideIndex = 1;
     }
 
     /**
@@ -32,32 +33,53 @@ class PageOverview {
         let pageDom = document.createElement("div");
         pageDom.innerHTML = html;
 
-        this._renderBoatTiles(pageDom);
+        let prevLink = pageDom.querySelector(".prev");
+        prevLink.addEventListener("click", () => this._plusSlides(-1));
+
+        let nextLink = pageDom.querySelector(".next");
+        nextLink.addEventListener("click", () => this._plusSlides(1));
+
+        let dotLinks = pageDom.querySelectorAll(".dot");
+
+        for (let i = 0; i < dotLinks.length; i++) {
+            let dotLink = dotLinks[i];
+            dotLink.addEventListener("click", () => this._showSlide(i + 1));
+        }
 
         this._app.setPageTitle("Mein Rezeptbuch");
         this._app.setPageCss(css);
         this._app.setPageHeader(pageDom.querySelector("header"));
         this._app.setPageContent(pageDom.querySelector("main"));
+
+        this._showSlide(this._slideIndex);
     }
 
-    /**
-     * Hilfsmethode, welche den HTML-Code zur Darstellung der Kacheln auf
-     * der Startseite erzeugt.
-     *
-     * @param {HTMLElement} pageDom Wurzelelement der eingelesenen HTML-Datei
-     * mit den HTML-Templates dieser Seite.
-     */
-    _renderBoatTiles(pageDom) {
-        let mainElement = pageDom.querySelector("main");
-        let templateElement = pageDom.querySelector("#template-tile");
+    _showSlide(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides fade");
+      let dots = document.getElementsByClassName("dot");
 
-        this._app.database.getAllRecords().forEach(boat => {
-            let html = templateElement.innerHTML;
-            html = html.replace("{HREF}", `#/Detail/${boat.id}`);
-            html = html.replace("{IMG}", boat.img);
-            html = html.replace("{NAME}", boat.name);
+      if (n > slides.length) {
+          this._slideIndex = 1;
+      } else  if (n < 1) {
+          this._slideIndex = slides.length;
+      } else {
+          this._slideIndex = n;
+      }
 
-            mainElement.innerHTML += html;
-        });
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      slides[this._slideIndex-1].style.display = "block";
+      dots[this._slideIndex-1].className += " active";
+    }
+
+    _plusSlides(n) {
+        this._showSlide(this._slideIndex += n);
     }
 }
