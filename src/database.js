@@ -29,6 +29,11 @@ class Database {
         // die in etwa den Tabellen einer klassischen Datenbank entsprechen.
         this._db = firebase.firestore();
 
+        //Firebase Storage für die Bilder
+        this._storage = firebase.storage();
+        this._storageRef = storage.ref();
+        this._picRef = storageRef.child('images');
+
         //Klassenvariable für alle Rezepte
         this._recipes = this.getAllRecipes();
     }
@@ -107,11 +112,17 @@ class Database {
             portionen: "5",
             zubereitungszeit: "00:20",
             ruhezeit: "02:30",
-            bild: ""
+            bild: "Red_Hot_Chili_Nudeln.jpg"
         }
 
         return tmp;
 
+    }
+
+    getPictureByName(name){
+        return this._picRef.child(name).getDownloadURL().then(function(url) {
+            return url;
+        });
     }
 
 

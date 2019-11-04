@@ -261,8 +261,8 @@ class App {
             let nodeULContent = document.createElement("DIV");
             nodeULContent.setAttribute("class", "modalUpperContentLeft");
             let nodeImg = document.createElement("IMG");
-            nodeImg.setAttribute("src", "img_pulpit.jpg")
-            nodeImg.setAttribute("alt", "The Pulpit Rock");
+            nodeImg.setAttribute("src", database.getPictureByName(recipe.bild));
+            nodeImg.setAttribute("alt", "Bild: " + recipe.titel);
             nodeULContent.appendChild(nodeImg);
 
             //#################
