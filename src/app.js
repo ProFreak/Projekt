@@ -9,7 +9,7 @@
  * Klassen bereitgestellt wird.
  */
 class App {
-  
+
     /**
      * Konstruktor. Im Parameter pages muss eine Liste mit den vorhandenen
      * Seiten der App übergeben werden. Die Liste muss folgendes Format haben:
@@ -269,6 +269,7 @@ class App {
             //#################
             //Modal oben Rechts
             let nodeURContent = document.createElement("DIV");
+            nodeURContent.setAttribute("class", "modalUpperContentRight");
 
             //Horizontale Liste für Zeit, Portionen
             let nodeURList = document.createElement("UL");
@@ -278,7 +279,7 @@ class App {
             let portIco = document.createElement("I");
             portIco.setAttribute("class", "icon-user");
             let portSpan = document.createElement("SPAN");
-            let pSpanText = document.createTextNode(recipe.portionen);
+            let pSpanText = document.createTextNode(recipe.portionen + " Portionen");
             portSpan.appendChild(pSpanText);
             portLi.appendChild(portIco);
             portLi.appendChild(portSpan);
@@ -288,7 +289,7 @@ class App {
             let timeIco = document.createElement("I");
             timeIco.setAttribute("class", "icon-user");
             let timeSpan = document.createElement("SPAN");
-            let tSpanText = document.createTextNode(recipe.zubereitungszeit);
+            let tSpanText = document.createTextNode(recipe.zubereitungszeit + " Stunden");
             timeSpan.appendChild(tSpanText);
             timeLi.appendChild(timeIco);
             timeLi.appendChild(timeSpan);
@@ -300,7 +301,7 @@ class App {
                 let restIco = document.createElement("I");
                 restIco.setAttribute("class", "icon-user");
                 let restSpan = document.createElement("SPAN");
-                let rSpanText = document.createTextNode(recipe.ruhezeit);
+                let rSpanText = document.createTextNode(recipe.ruhezeit + " Stunden");
                 restSpan.appendChild(rSpanText);
                 restLi.appendChild(restIco);
                 restLi.appendChild(restSpan);
