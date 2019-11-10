@@ -66,7 +66,7 @@ class Database {
     getAllFavorites(){
       let rezeptliste = new getAllRecipes();
       let favoritenliste = [];
-      for(int i = 0; i < rezeptliste.length(); i++){
+      for(let i = 0; i < rezeptliste.length(); i++){
         if(rezeptliste[i].favorit){
           favoritenliste.push(rezeptliste[i]);
         }
