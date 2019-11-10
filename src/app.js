@@ -278,7 +278,7 @@ class App {
 
             let portLi = document.createElement("LI");
             let portIco = document.createElement("I");
-            portIco.setAttribute("class", "icon-user");
+            portIco.setAttribute("class", "icon-users");
             let portSpan = document.createElement("SPAN");
             let pSpanText = document.createTextNode(recipe.portionen + " Portionen");
             portSpan.appendChild(pSpanText);
@@ -288,7 +288,7 @@ class App {
 
             let timeLi = document.createElement("LI");
             let timeIco = document.createElement("I");
-            timeIco.setAttribute("class", "icon-user");
+            timeIco.setAttribute("class", "icon-hourglass");
             let timeSpan = document.createElement("SPAN");
             let tSpanText = document.createTextNode(recipe.zubereitungszeit + " Stunden");
             timeSpan.appendChild(tSpanText);
@@ -300,7 +300,7 @@ class App {
             if (recipe.ruhezeit !== "") {
                 let restLi = document.createElement("LI");
                 let restIco = document.createElement("I");
-                restIco.setAttribute("class", "icon-user");
+                restIco.setAttribute("class", "icon-clock");
                 let restSpan = document.createElement("SPAN");
                 let rSpanText = document.createTextNode(recipe.ruhezeit + " Stunden");
                 restSpan.appendChild(rSpanText);
@@ -312,8 +312,19 @@ class App {
             //Favoriten-Icon
             let favLi = document.createElement("LI");
             let favIco = document.createElement("I");
-            favIco.setAttribute("class", "icon-user");
+            let favSpan = document.createElement("SPAN");
+            let fSpanText;
+
+            if (recipe.favorit) {
+              favIco.setAttribute("class", "icon-heart-filled");
+              fSpanText = document.createTextNode("In den Favoriten");
+            } else {
+              favIco.setAttribute("class", "icon-heart");
+              fSpanText = document.createTextNode("Zu Favoriten hinzufügen");
+            }
+            favSpan.appendChild(fSpanText);
             favLi.appendChild(favIco);
+            favLi.appendChild(favSpan);
             nodeURList.appendChild(favLi);
 
             //Zutatenliste hinzufügen
@@ -342,7 +353,6 @@ class App {
 
             //#############
         }
-
 
         //Dialogfenster öffnen
         modal.style.display = "block";

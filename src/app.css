@@ -7,6 +7,7 @@
  */
 @import url('https://fonts.googleapis.com/css?family=Be+Vietnam|Covered+By+Your+Grace|Julius+Sans+One|Rock+Salt|Special+Elite&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
 
 /*
  * ALLGEMEINES
@@ -26,6 +27,7 @@ html {
     font-family: 'Be Vietnam', sans-serif ;/* allgemein*/
     font-family: 'Julius Sans One', sans-serif; /*gerade, groß*/
     font-family: 'Quicksand', sans-serif; /*allgemein gerade*/
+    font-family: 'Indie Flower', cursive; /* Hand deutlich*/
     font-size: 14pt;
     line-height: 1.6;
 
@@ -48,6 +50,61 @@ html {
     html {
         font-size: 16pt;
     }
+
+    /* Inhaltsbereich des Dialogfensters */
+    .modal-content{
+        width: 80%;
+        margin: 2%;
+        margin-left: auto; /* zentrierung */
+        margin-right: auto;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    /*
+    * Dialogfenster oberer Bereich
+    * Bild, Zutatenliste, Portionen, Zubereitungszeit
+    */
+    .modalUpperContent{
+      display: flex;
+      flex-direction: row;
+    }
+
+    /*
+    * Dialogfenster oberer Bereich links
+    * Bild
+    */
+    .modalUpperContentLeft{
+      float: left;
+      width: 40%;
+      height: 100%;
+    }
+
+    /*
+    * Dialogfenster oberer Bereich Rechts
+    * Zubereitungsliste, Portionen, Zeit, Dauer
+    */
+    .modalUpperContentRight{
+
+    }
+
+    .modal-right-header li{
+      padding-right: 30px;
+    }
+
+    .modal-right-header ul{
+      padding-left: 10px;
+    }
+
+    /*
+    * unterer Dialogbereich
+    * Anleitung
+    */
+    .modalLowerContent{
+      margin: 40px;
+      margin-top: 0px;
+    }
+
 }
 
 @media (min-width: 80em) {
@@ -251,52 +308,20 @@ body .modal-container{
 
 /* Inhaltsbereich des Dialogfensters */
 .modal-content{
-    width: 80%;
+    width: 85%;
     margin: 2%;
+    margin-top: 4%;
     margin-left: auto; /* zentrierung */
     margin-right: auto;
     background: white;
-    border-radius: 15px;
-    padding-left: 5px;
-    padding-right: 5px;
+    border-radius: 3px;
     font-family: 'Quicksand', sans-serif;
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
-/*
-* Dialogfenster oberer Bereich
-* Bild, Zutatenliste, Portionen, Zubereitungszeit
-*/
-.modalUpperContent{
-  font-size: 24px;
-  display: flex;
-  flex-direction: row;
-}
 #modal-headline{
-  font-family: 'Rock Salt', cursive;
-}
-
-/*
-* Dialogfenster oberer Bereich links
-* Bild
-*/
-.modalUpperContentLeft{
-  float: left;
-  width: 40%;
-  height: 100%;
-}
-
-/*
-* Dialogfenster oberer Bereich Rechts
-* Zubereitungsliste, Portionen, Zeit, Dauer
-*/
-.modalUpperContentRight{
-
-}
-
-.modalUpperContentRight li{
-  list-style: none;
-  margin: auto;
-  list-style-type: "- ";
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 /*
@@ -306,17 +331,22 @@ body .modal-container{
 .modal-right-header{
   font-family: 'Covered By Your Grace', cursive;
   float: right;
+  width: 100%;
+}
+
+.modalUpperContentRight li{
+  list-style: none;
+  margin: auto;
+  list-style-type: "- ";
 }
 
 .modal-right-header li{
   float: left;
   list-style: none;
-  padding-right: 30px;
+  padding-right: 10px;
 }
 
-.modal-right-header ul{
-  padding-left: 10px;
-}
+
 
 /* Schließen-Knopf */
 .close {
