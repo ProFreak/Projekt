@@ -34,9 +34,7 @@ class App {
         this._currentPageObject = null;
 
         // Datenbank-Objekt zum Lesen und Speichern von Daten
-        this.database = new Database();
-
-        console.log(this.database.getAllRecipes());
+        this.database = new Database();        
     }
 
     /**
@@ -44,7 +42,7 @@ class App {
      * Funktionieren der App registriert. Diese Methode muss daher aus der
      * index.html heraus aufgerufen werden.
      */
-    run() {
+    async run() {
         // Globale Event Listener registrieren
         document.querySelector("header nav .toggle-menu a").addEventListener("click", this._toggleHamburgerMenu);
         document.querySelector("header nav .go-back a").addEventListener("click", () => window.history.back());
@@ -52,6 +50,7 @@ class App {
         // Single Page Router starten und die erste Seite aufrufen
         window.addEventListener("hashchange", () => this._handleRouting());
         this._handleRouting();
+        await this.database.getAllRecipes();
     }
 
     /**
@@ -248,7 +247,9 @@ class App {
 
         } else {
             //Detail-Modal definieren
-            let recipe = this.database.getRecipeById(trigger);
+            let recipe = this.database.getRecipeById(trigger);    
+            console.log(recipe);
+                    
 
             //Überschrift
             headline.textContent = recipe.titel;
@@ -262,7 +263,7 @@ class App {
             let nodeULContent = document.createElement("DIV");
             nodeULContent.setAttribute("class", "modalUpperContentLeft");
             let nodeImg = document.createElement("IMG");
-            nodeImg.setAttribute("src", database.getPictureByName(recipe.bild));
+            nodeImg.setAttribute("src", recipe.bild);
             nodeImg.setAttribute("alt", "Bild: " + recipe.titel);
             nodeULContent.appendChild(nodeImg);
 
