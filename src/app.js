@@ -348,11 +348,14 @@ class App {
         modal.style.display = "block";
     }
 
+    /*
+    *   Schließt das Modal-Fenster. Fragt den Benutzer bei "Erstellen"-Modal, ob er wirklich Schließen möchte, da eingegebene Daten verloren gehen.
+    */
     closeModal() {
         let modal = document.getElementById("modal");
-        //Tyypcheck und Doppelte Schließ-Frage!!!
+        //Typcheck und Doppelte Schließ-Frage!!!
         if (modal.classList.contains("erstellen")) {
-            if (confirm('Sind Sie sicher, dass Sie das erstellen abbrechen wollen? Ihr Rezept geht verloren!')) {
+            if (confirm('Sind Sie sicher, dass Sie das erstellen abbrechen wollen? Ihr Rezept geht möglicherweise verloren!')) {
                 //DB Handling um neues Rezept anzulegen!
                 modal.style.display = "none";
             }
@@ -365,5 +368,12 @@ class App {
 
     modalSubmit() {
 
+    }
+
+    /*
+    *   Lädt die Liste der Rezepte aus der Datenbank erneut.
+    */
+    async refresh(){
+        return await this.database.getAllRecipes();
     }
 }
