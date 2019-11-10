@@ -346,6 +346,10 @@ body .modal-container{
   padding-right: 10px;
 }
 
+.modalUpperContentLeft img {
+    max-width: 100%;
+}
+
 
 
 /* Schließen-Knopf */

@@ -297,7 +297,7 @@ class App {
             nodeURList.appendChild(timeLi);
 
             //Wenn Rezept Ruhezeit enthält, dann hinzufügen
-            if (recipe.ruhezeit !== "") {
+            if (recipe.ruhezeit !== "" && recipe.ruhezeit !== undefined) {
                 let restLi = document.createElement("LI");
                 let restIco = document.createElement("I");
                 restIco.setAttribute("class", "icon-clock");
