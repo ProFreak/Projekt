@@ -371,3 +371,21 @@ body .modal-container{
 .erstellen{
 
 }
+
+.modalLowerContent textarea{
+    width: 100%;
+    min-height: 5em;
+}
+
+#titleInput {
+    width: 100%;
+}
+
+/* Bild hochladen */
+.dropzone{
+    width: 100%;
+    height: 100%;
+    min-height: 10em;
+    text-align: center;
+    background: grey;
+}
