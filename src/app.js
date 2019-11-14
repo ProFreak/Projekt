@@ -286,9 +286,9 @@ class App {
             portionInput.setAttribute("placeholder", "Portionen");
             portionInput.setAttribute("id", "portionInput");
             let portSpan = document.createElement("SPAN");
-            portSpan.appendChild(document.createTextNode(""));
-            portLi.appendChild(portSpan);
+            portSpan.appendChild(document.createTextNode("Test"));
             portLi.appendChild(portionInput);
+            portLi.appendChild(portSpan);
             nodeURList.appendChild(portLi);
 
             let timeLi = document.createElement("LI");
@@ -313,6 +313,7 @@ class App {
             favInput.setAttribute("type", "checkbox");
             favInput.setAttribute("id", "favInput");
             let favSpan = document.createElement("SPAN");
+            favSpan.setAttribute("id", "favInputSpan");
             let favText = document.createTextNode("Favorit");
             favSpan.appendChild(favText);
             favLi.appendChild(favSpan);

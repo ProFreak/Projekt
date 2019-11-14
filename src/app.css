@@ -368,8 +368,20 @@ body .modal-container{
   }
 
 /* Modal erstellen */
-.erstellen{
+.erstellen span{
+    display: block;
+}
 
+.erstellen input{
+    display: block;
+}
+
+#favInput{
+    display: inline-block;
+}
+
+#favInputSpan{
+    display: inline-block;
 }
 
 .modalLowerContent textarea{
