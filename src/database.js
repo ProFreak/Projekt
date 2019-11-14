@@ -60,19 +60,19 @@ class Database {
         return rezeptliste;
     }
 
-    /*
-    * Gibt alle Rezepte zurück, die als Favorit gekennzeichnet wurden
-    */
+    // Gibt alle Rezepte zurück, die als Favorit gekennzeichnet wurden
     getAllFavorites(){
-      let rezeptliste = new getAllRecipes();
+      let rezeptliste = this._recipes;
       let favoritenliste = [];
-      for(int i = 0; i < rezeptliste.length(); i++){
+      for(let i = 0; i < rezeptliste.length(); i++){
         if(rezeptliste[i].favorit){
           favoritenliste.push(rezeptliste[i]);
         }
       }
       favoritenliste.sort((a, b) => this._sortAlphaNum(a.titel, b.titel));
+      return favoritenliste;
     }
+
 
     /*
     *   Fügt ein Rezept in JSON-Form der DB hinzu und generiert automatisch eine ID
