@@ -5,6 +5,8 @@
  * Datenbankverbindung besteht zu Google Firebase und Google Firestore für Bilder
  */
 class Database {
+
+
     /**
      * Konstruktor.
      */
@@ -30,6 +32,7 @@ class Database {
         this._db = firebase.firestore();
 
         //Klassenvariable für alle Rezepte
+        this._recipes = [];
         this._recipes = this.getAllRecipes();
 
         //console.log(getRecipesById("02wWY3Jx08cKAzR1abX5"));
@@ -38,11 +41,11 @@ class Database {
     /*
     *   Gibt alle Rezepte in alphabetischer Reihenfolge sortiert zurück
     */
-    getAllRecipes() {
+    async getAllRecipes() {
         //Hilfsarray
         let rezeptliste = [];
         //DB-Zugriff
-        this._db.collection('rezepte').get().then((snapshot) => {
+        await this._db.collection('rezepte').get().then((snapshot) => {
             snapshot.forEach((doc) => {
                 //Dokumente für Hilfsarray erstellen und pushen
                 let data = doc.data();
@@ -50,7 +53,7 @@ class Database {
                 rezeptliste.push(data);
             });
             //Hilfsarray alphabetisch sortieren
-            rezeptliste.sort((a, b) => this._sortAlphaNum(a.titel, b.titel));
+            rezeptliste.sort((a, b) => this._sortAlphaNum(a.titel, b.titel));            
         })
             .catch((err) => { //Fehler bei DB-Zugriff abfangen
                 console.log('Error getting documents', err);
@@ -88,48 +91,57 @@ class Database {
     *   update beschreibt ein JSON-Dokument mit den zu aktualisierenden Feldern und deren neuen Werten
     *   !!!Vorsicht bei geschachtelten Feldern! (Felder, deren Wert wieder ein JSON ist.) Hier muss
     *  ' Feld.Unterfeld: Value ' übergeben werden und NICHT ein einfaches JSON
+    *   für genauere Infos siehe: https://firebase.google.com/docs/database/web/read-and-write
     */
     updateRecipe(id, update) {
         this._db.collection('rezepte').doc(id).update(update);
     }
 
     /*
+    *   Codiert das eigebene Bild in base64, damit es in der DB gespeichert werden kann.
+    */
+    encodePicture(pic){
+        return Base64.btoa(pic.toString);
+    }
+
+    /*
     * Rezept durch Namen finden
     */
     getRecipeByName(titel) {
-        // "Schleife", die im Array nach dem Titel sucht
-        return this._recipes.find(a => {
-            // 1:1 Vergleich des Inhalts vom gesuchten Titel
-            return a.titel === titel;
-        });
+        let tmp = null;
+        
+        //Rezeptliste nach passendem Rezept mit übereinstimmendem Titel durchsuchen
+        for(let i = 0; i < this._recipes.length; i++){
+            if(this._recipes[i].titel == titel){
+                tmp = this._recipes[i];
+                break;
+            }
+        }
+
+        return tmp;
     }
 
     /*
     * Rezept durch ID finden
     */
-
     getRecipeById(id) {
-        let tmp = {
-            anleitung: "Das Wichtigste an einer Bolognese ist das sogenannte Soffritto: Dazu einen ordentlichen Klotz Butter (ca. 125 g) und ein wenig Olivenöl (damit die Butter nicht verbrennt) in eine Pfanne geben. Zwiebeln, Möhren und Staudensellerie putzen bzw. schälen, ganz fein hacken und auf möglichst niedriger Flamme langsam (mind. 30 Minuten) darin garen, bis das Gemüse schön glasig und weich geworden ist. Wichtig ist, dass das Gemüse nicht brät, sondern wirklich nur dünstet - also nicht zu heiß werden lassen! Derweil das Rinderhackfleisch so lange in einer weiteren Pfanne scharf braten, bis es anfängt zu karamellisieren. Anschließend mit einem Schuss Weißwein ablöschen, sodass sich alles Angebackene vom Boden lösen lässt. Wichtig: Jetzt je nach Saucenmenge ca.1/4 bis 1/2 Liter Milch hinzugeben, die sich um das Hackfleisch legt und diesem einen ganz milden Geschmack verleiht. Sobald das Fleisch mit Weißwein und Milch aufkocht, die Dosentomaten hinzugeben (die erforderlichen frischen Tomaten sind bei uns leider nicht erhältlich). Am besten geeignet sind hierfür die San Marzano Eiertomaten aus der Gegend von Neapel. Diese haben einen ganz eigenen süßlichen Geschmack, der der Sauce Bolognese und auch einer ordentlichen Sauce Napoli sehr zuträglich ist. Sobald dies alles wieder aufgekocht ist, den Soffritto hinzugeben. Der in Scheiben geschnittene Knoblauch und die zerstampften Peperoncini können jetzt auch mit hinein. Die Bolognese kann dann gar nicht lange genug köcheln. Ideal wären ca. 5 Stunden. Mindestens 2 Stunden sollte sie aber köcheln. Dann ggf. abkühlen lassen und ca. 1 Stunde vor der Mahlzeit langsam aufwärmen (muss aber nicht, man kann sie auch gleich servieren). Tipp: Man kann auch noch ein wenig frisch gehackte Möhre und Staudensellerie nachschieben, um ein wenig mehr Biss an das Gemüse zu kriegen. Mit Meersalz und frisch gemahlenem schwarzem Pfeffer abschmecken. In der Zwischenzeit die Nudeln nach Packungsanweisung bissfest kochen, anschließend abgießen.Die Spaghetti auf Tellern anrichten und die Bolognese darüber verteilen. Heiß servieren. ",
-            favorit: false,
-            id: "02wWY3Jx08cKAzR1abX5",
-            titel: "Spaghetti Bolognese",
-            zutaten: [
-                "1kg Rinderhackfleisch", "3 Knoblauchzehen", "3 Karotten", "3 Stangen Staudensellerie", "2 Zwiebeln", "600g Dosentomaten", "600g Spaghetti", "125g Butter", "500ml Milch",
-                "3 Peperoncini",
-                "Meersalz",
-                "Pfeffer",
-                "Olivenöl",
-                "Weißwein"
-            ],
-            portionen: "5",
-            zubereitungszeit: "00:20",
-            ruhezeit: "02:30",
-            bild: ""
+        let tmp = null;
+        
+        //Rezeptliste nach passendem Rezept mit der korrekten ID durchsuchen
+        for(let i = 0; i < this._recipes.length; i++){
+            if(this._recipes[i].id == id){
+                tmp = this._recipes[i];
+                break;
+            }
         }
 
         return tmp;
+    }
 
+    getPictureByName(name) {
+        return this._picRef.child(name).getDownloadURL().then(function (url) {
+            return url;
+        });
     }
 
 

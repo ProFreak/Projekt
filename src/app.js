@@ -35,8 +35,6 @@ class App {
 
         // Datenbank-Objekt zum Lesen und Speichern von Daten
         this.database = new Database();
-
-        console.log(this.database.getAllRecipes());
     }
 
     /**
@@ -44,7 +42,7 @@ class App {
      * Funktionieren der App registriert. Diese Methode muss daher aus der
      * index.html heraus aufgerufen werden.
      */
-    run() {
+    async run() {
         // Globale Event Listener registrieren
         document.querySelector("header nav .toggle-menu a").addEventListener("click", this._toggleHamburgerMenu);
         document.querySelector("header nav .go-back a").addEventListener("click", () => window.history.back());
@@ -52,6 +50,7 @@ class App {
         // Single Page Router starten und die erste Seite aufrufen
         window.addEventListener("hashchange", () => this._handleRouting());
         this._handleRouting();
+        await this.database.getAllRecipes();
     }
 
     /**
@@ -246,9 +245,124 @@ class App {
             modal.classList.add("erstellen");
             headline.textContent = "Neues Rezept";
 
+            //Modal Content
+            let nodeUContent = document.createElement("DIV");
+            nodeUContent.setAttribute("class", "modalUpperContent");
+
+            //########################
+            //Modal Oben Links - Bild
+            let nodeULContent = document.createElement("DIV");
+            nodeULContent.setAttribute("class", "modalUpperContentLeft");
+            let nodeImg = document.createElement("DIV");
+            nodeImg.setAttribute("class", "dropzone");
+            nodeImg.appendChild(document.createTextNode("Ziehen Sie ein Bild hierher"));
+            nodeImg.addEventListener('dragover', this.modalDragOver, false);
+            nodeImg.addEventListener('drop', this.imageSelection, false);
+            nodeULContent.appendChild(nodeImg);
+
+            nodeUContent.appendChild(nodeULContent);
+
+            //#################
+            //Modal oben Rechts
+            let nodeURContent = document.createElement("DIV");
+            nodeURContent.setAttribute("class", "modalUpperContentRight");
+
+            //Eingabe für Titel
+            let titleInput = document.createElement("INPUT");
+            titleInput.setAttribute("type", "text");
+            titleInput.setAttribute("placeholder", "Titel");
+            titleInput.setAttribute("id", "titleInput");
+            titleInput.setAttribute("required", "true");
+            nodeURContent.appendChild(titleInput);
+
+            //Horizontale Liste für Zeit, Portionen
+            let nodeURList = document.createElement("UL");
+            nodeURList.setAttribute("class", "modal-right-header");
+
+            let portLi = document.createElement("LI");
+            let portionInput = document.createElement("INPUT");
+            portionInput.setAttribute("type", "text");
+            portionInput.setAttribute("required", "true");
+            portionInput.setAttribute("placeholder", "Portionen");
+            portionInput.setAttribute("id", "portionInput");
+            let portSpan = document.createElement("SPAN");
+            portSpan.appendChild(document.createTextNode("Test"));
+            portLi.appendChild(portionInput);
+            portLi.appendChild(portSpan);
+            nodeURList.appendChild(portLi);
+
+            let timeLi = document.createElement("LI");
+            let timeInput = document.createElement("INPUT");
+            timeInput.setAttribute("type", "text");
+            timeInput.setAttribute("required", "true");
+            timeInput.setAttribute("placeholder", "Zubereitungszeit (HH:MM)");
+            timeInput.setAttribute("id", "timeInput");
+            timeLi.appendChild(timeInput);
+            nodeURList.appendChild(timeLi);
+
+            let restLi = document.createElement("LI");
+            let restInput = document.createElement("INPUT");
+            restInput.setAttribute("type", "text");
+            restInput.setAttribute("placeholder", "Ruhezeit (HH:MM)");
+            restInput.setAttribute("id", "restInput");
+            restLi.appendChild(restInput);
+            nodeURList.appendChild(restLi);
+
+            let favLi = document.createElement("LI");
+            let favInput = document.createElement("INPUT");
+            favInput.setAttribute("type", "checkbox");
+            favInput.setAttribute("id", "favInput");
+            let favSpan = document.createElement("SPAN");
+            favSpan.setAttribute("id", "favInputSpan");
+            let favText = document.createTextNode("Favorit");
+            favSpan.appendChild(favText);
+            favLi.appendChild(favSpan);
+            favLi.appendChild(favInput);
+            nodeURList.appendChild(favLi);
+
+            nodeURContent.appendChild(nodeURList);
+
+            let nodeIngedients = document.createElement("UL");
+            nodeIngedients.setAttribute("id", "addIngredList");
+            let ingredientLi = document.createElement("LI");
+            let ingredientInput = document.createElement("INPUT");
+            ingredientInput.setAttribute("type", "text");
+            ingredientInput.setAttribute("placeholder", "Zutat");
+            //Listener fuer Tastenanschläge im Bereich der Liste
+            nodeIngedients.addEventListener('keypress', this._ingredOnKeyDown);
+
+            ingredientLi.appendChild(ingredientInput);
+            nodeIngedients.appendChild(ingredientLi);
+
+            nodeURContent.appendChild(nodeIngedients);
+
+            nodeUContent.appendChild(nodeURContent);
+
+            //######################################
+            //Unterer Body - Zubereitungsanleitung
+            let nodeLContent = document.createElement("DIV");
+            nodeLContent.setAttribute("class", "modalLowerContent");
+            let manualInput = document.createElement("TEXTAREA");
+            manualInput.setAttribute("placeholder", "Zubereitungsanleitung");
+            nodeLContent.appendChild(manualInput);
+
+
+            modalBody.appendChild(nodeUContent);
+            modalBody.appendChild(nodeLContent);
+
+            let submitButton = document.createElement("BUTTON");
+            let btnText = document.createTextNode("Speichern");
+            submitButton.appendChild(btnText);
+            submitButton.setAttribute("id", "speichern");
+            submitButton.addEventListener("click", this.modalSubmit);
+            modalFooter.appendChild(submitButton);
+
+
+
         } else {
             //Detail-Modal definieren
             let recipe = this.database.getRecipeById(trigger);
+
 
             //Überschrift
             headline.textContent = recipe.titel;
@@ -262,8 +376,8 @@ class App {
             let nodeULContent = document.createElement("DIV");
             nodeULContent.setAttribute("class", "modalUpperContentLeft");
             let nodeImg = document.createElement("IMG");
-            nodeImg.setAttribute("src", "img_pulpit.jpg")
-            nodeImg.setAttribute("alt", "The Pulpit Rock");
+            nodeImg.setAttribute("src", recipe.bild);
+            nodeImg.setAttribute("alt", "Bild: " + recipe.titel);
             nodeULContent.appendChild(nodeImg);
 
             //#################
@@ -296,7 +410,7 @@ class App {
             nodeURList.appendChild(timeLi);
 
             //Wenn Rezept Ruhezeit enthält, dann hinzufügen
-            if (recipe.ruhezeit !== "") {
+            if (recipe.ruhezeit !== "" && recipe.ruhezeit !== undefined) {
                 let restLi = document.createElement("LI");
                 let restIco = document.createElement("I");
                 restIco.setAttribute("class", "icon-clock");
@@ -315,11 +429,11 @@ class App {
             let fSpanText;
 
             if (recipe.favorit) {
-              favIco.setAttribute("class", "icon-heart-filled");
-              fSpanText = document.createTextNode("In den Favoriten");
+                favIco.setAttribute("class", "icon-heart-filled");
+                fSpanText = document.createTextNode("In den Favoriten");
             } else {
-              favIco.setAttribute("class", "icon-heart");
-              fSpanText = document.createTextNode("Zu Favoriten hinzufügen");
+                favIco.setAttribute("class", "icon-heart");
+                fSpanText = document.createTextNode("Zu Favoriten hinzufügen");
             }
             favSpan.appendChild(fSpanText);
             favLi.appendChild(favIco);
@@ -357,22 +471,85 @@ class App {
         modal.style.display = "block";
     }
 
+    /*
+    *   Schließt das Modal-Fenster. Fragt den Benutzer bei "Erstellen"-Modal, ob er wirklich Schließen möchte, da eingegebene Daten verloren gehen.
+    */
     closeModal() {
         let modal = document.getElementById("modal");
-        //Tyypcheck und Doppelte Schließ-Frage!!!
+        let modalBody = document.getElementById("modal-body");
+
+        //Typcheck und Doppelte Schließ-Frage!!!
         if (modal.classList.contains("erstellen")) {
-            if (confirm('Sind Sie sicher, dass Sie das erstellen abbrechen wollen? Ihr Rezept geht verloren!')) {
+            if (confirm('Sind Sie sicher, dass Sie das erstellen abbrechen wollen? Ihr Rezept geht möglicherweise verloren!')) {
                 //DB Handling um neues Rezept anzulegen!
                 modal.style.display = "none";
+
+                while (modalBody.firstChild) {
+                    modalBody.removeChild(modalBody.firstChild);
+                }
             }
         } else {
             modal.style.display = "none";
-        }
 
+            while (modalBody.firstChild) {
+                modalBody.removeChild(modalBody.firstChild);
+            }
+        }
+    }
+
+    //Fehlerhaft!!
+    imageSelection(event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        var bild = event.dataTransfer.files[0]; // FileList Objekt        
+
+        document.getElementsByClassName("dropzone").appendChild(document.createTextNode('Upload: ' + bild.name + ', Dateigröße: ' + bild.size + ' bytes'));
+    }
+
+    modalDragOver(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'copy';
+    }
+
+    _ingredOnKeyDown(e) {
+        if (this.childNodes[this.childNodes.length - 1].childNodes[0].value !== "") {
+            if (e.keyCode === 13) {
+            } else {
+                for(let i = 0; i < this.childNodes.length; i++){                    
+                    if(this.childNodes[i].childNodes[0].value.trim() === "") {
+                        this.removeChild(this.childNodes[i]);
+                    }
+                }
+
+                let ingredientLi = document.createElement("LI");
+                let ingredientInput = document.createElement("INPUT");
+                ingredientInput.setAttribute("type", "text");
+                ingredientInput.setAttribute("placeholder", "Zutat");
+
+                ingredientLi.appendChild(ingredientInput);
+                this.appendChild(ingredientLi);
+            }
+        } else {
+            if (e.keyCode === 13) {                
+                this.childNodes[this.childNodes.length - 1].childNodes[0].focus();
+            }
+        }
+    }
+
+    modalSubmit(e) {
+        e.preventDefault();
+
+        let titleInput = document.getElementById("titleInput");
+        
 
     }
 
-    modalSubmit() {
-
+    /*
+    *   Lädt die Liste der Rezepte aus der Datenbank erneut.
+    */
+    async refresh() {
+        return await this.database.getAllRecipes();
     }
 }

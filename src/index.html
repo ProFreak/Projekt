@@ -32,7 +32,7 @@
 
         <!-- Anwendung starten -->
         <script>
-            window.addEventListener("load", () => {
+            window.addEventListener("load",async () => {
                 let pages = [{
                     url: "^/$",
                     klass: PageOverview,
@@ -45,7 +45,7 @@
                 }];
 
                 let app = new App("Segelfreunde", pages);
-                app.run();
+                await app.run();
 
                 //Modal schließen
                 let modal = document.getElementById("modal");
@@ -62,7 +62,7 @@
                 };
 
                 //nur zum Test
-                app.setModalContent("02wWY3Jx08cKAzR1abX5");
+                app.setModalContent("erstellen");
             });
 
             //noch unklar
