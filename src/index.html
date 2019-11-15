@@ -6,6 +6,10 @@
         <link rel="shortcut icon" href="icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 
+        <!-- Google Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-firestore.js"></script>
+
         <!-- Klasse App: Steuert die gesamte Anwendung -->
         <script src="app.js"></script>
         <link rel="stylesheet" href="app.css" />
@@ -28,7 +32,7 @@
 
         <!-- Anwendung starten -->
         <script>
-            window.addEventListener("load", () => {
+            window.addEventListener("load",async () => {
                 let pages = [{
                     url: "^/$",
                     klass: PageOverview,
@@ -41,17 +45,56 @@
                 }];
 
                 let app = new App("Segelfreunde", pages);
-                app.run();
+                await app.run();
+
+                //Modal schließen
+                let modal = document.getElementById("modal");
+                let close = document.getElementById("close-modal");
+
+                close.onclick = function() {
+                    app.closeModal();
+                };
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        app.closeModal();
+                    }
+                };
+
+                //nur zum Test
+                app.setModalContent("erstellen");
             });
+
+            //noch unklar
+            async function reloadData() {
+                  deletedIds = [];
+                  let rezepte = await database.selectAllRezepte();
+                  table.replaceData(rezepte);
+              }
         </script>
 
         <!-- Dummy-Element für dynamisch nachgeladene CSS-Regeln -->
         <style id="page-css"></style>
     </head>
     <body>
+        <!-- Dialog platzhalter für verscheidene Funktionen -->
+        <div id="modal" class="modal-container">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <span class="close" id="close-modal"><i class="icon-cancel"></i></span>
+                  <h2 id="modal-headline">Modal Header</h2>
+                </div>
+                <hr>
+                <div class="modal-body" id="modal-body">
+                </div>
+                <hr>
+                <div class="modal-footer" id="modal-footer">
+                </div>
+              </div>
+        </div>
         <!-- Kopfbereich der App -->
-        <header
-          <img class="logo" src="icon.png" alt="Logo" />
+        <header>
+          <!-- <img class="logo" src="icon.png" alt="Logo" /> -->
             <nav>
                 <!-- Logo, Zurück-Button und Titel der Seite -->
                 <img class="logo" src="icon.png" alt="Logo" />
