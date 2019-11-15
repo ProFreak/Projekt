@@ -56,7 +56,7 @@ class PageOverview {
 
     _showSlide(n) {
       let i;
-      let slides = document.getElementsByClassName("mySlides fade");
+      let slides = document.getElementsByClassName("mySlides");
       let dots = document.getElementsByClassName("dot");
 
       if (n > slides.length) {

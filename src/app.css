@@ -256,6 +256,7 @@ main a:hover {
   display: none;
 }
 
+
 /* Next & previous buttons */
 .prev, .next {
   cursor: pointer;
@@ -291,7 +292,7 @@ main a:hover {
   position: absolute;
   bottom: 8px;
   width: 100%;
-  text-align: center;
+
 }
 
 /* Number text (1/3 etc) */
