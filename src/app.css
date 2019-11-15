@@ -63,6 +63,7 @@ body {
 }
 
 
+
 /*
  * KOPFBEREICH
  */
@@ -226,6 +227,7 @@ main {
     padding: var(--content-padding);
     background: rgba(240,240,240, 0.15);
     flex: 1;
+    color: white;
 
     /*z-index: 9;*/
     /*Abstand damit Navigationsleiste nicht Main Content überlappt */
@@ -244,18 +246,14 @@ main a:hover {
 }
 * {box-sizing:border-box}
 
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
+
+
 
 /* Hide the images by default */
 .mySlides {
   display: none;
+  display: inline-block;
 }
-
 
 /* Next & previous buttons */
 .prev, .next {
@@ -284,14 +282,43 @@ main a:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+
+}
 /* Caption text */
-.text {
+.slide_text {
   color: #f2f2f2;
   font-size: 15px;
   padding: 8px 12px;
-  position: absolute;
+
   bottom: 8px;
   width: 100%;
+  display: block;
+  margin-left: 5em auto;
+
+
+}
+.mySlides img{
+    width: 12em;
+    height: 10em;
+    display:inline-block;
+
+    shape-margin: 3em;
+
+
+
+}
+
+.ingredients{
+    color: white;
+    margin: 0em;
+    padding: 1em;
+    display: block;
+
 
 }
 
@@ -314,6 +341,7 @@ main a:hover {
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
+
 }
 
 .active, .dot:hover {
