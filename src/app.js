@@ -255,13 +255,14 @@ class App {
             nodeULContent.setAttribute("class", "modalUpperContentLeft");
 
             let imgInput = document.createElement("INPUT");
-            imgInput.setAttribute("type", "file");
+            imgInput.setAttribute("type", "text");
             imgInput.setAttribute("id", "imgInput");
+            imgInput.setAttribute("placeholder", "URL / Base64-Bild")
             imgInput.addEventListener("change", this.imageSelection);
             let imgPrev = document.createElement("IMG");
             imgPrev.setAttribute("id", "imgPrev");
             imgPrev.setAttribute("src", "#");
-            imgPrev.setAttribute("alt", "Der Upload von Bildern steht noch nicht zur Verfügung.");
+            imgPrev.setAttribute("alt", "Geben sie die Bildquelle oder ein Bild im Base64-Format ein.");
 
             nodeULContent.appendChild(imgInput);
             nodeULContent.appendChild(imgPrev);
@@ -357,7 +358,7 @@ class App {
             let btnText = document.createTextNode("Speichern");
             submitButton.appendChild(btnText);
             submitButton.setAttribute("id", "speichern");
-            submitButton.addEventListener('click', this.modalSubmit(this.database));
+            submitButton.addEventListener('click', this.modalSubmit);
             modalFooter.appendChild(submitButton);
 
 
@@ -502,9 +503,8 @@ class App {
 
     //Fehlerhaft!!
     imageSelection(event) {
-        if (this.files && this.files[0]) {
-            var img = document.getElementById("imgPrev"); 
-            img.src = URL.createObjectURL(this.files[0]);
+        if(this.value !== ""){
+            document.getElementById("imgPrev").setAttribute("src", this.value);
         }
     }
 
@@ -534,9 +534,7 @@ class App {
     }
  
     modalSubmit(e) {
-        
-        let imgInput = document.getElementById("imgInput");
-        //console.log(e.encodePicture(imgInput.files[0]));
+        console.log("Test");
         
         
 
