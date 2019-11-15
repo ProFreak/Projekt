@@ -253,12 +253,18 @@ class App {
             //Modal Oben Links - Bild
             let nodeULContent = document.createElement("DIV");
             nodeULContent.setAttribute("class", "modalUpperContentLeft");
-            let nodeImg = document.createElement("DIV");
-            nodeImg.setAttribute("class", "dropzone");
-            nodeImg.appendChild(document.createTextNode("Ziehen Sie ein Bild hierher"));
-            nodeImg.addEventListener('dragover', this.modalDragOver, false);
-            nodeImg.addEventListener('drop', this.imageSelection, false);
-            nodeULContent.appendChild(nodeImg);
+
+            let imgInput = document.createElement("INPUT");
+            imgInput.setAttribute("type", "file");
+            imgInput.setAttribute("id", "imgInput");
+            imgInput.addEventListener("change", this.imageSelection);
+            let imgPrev = document.createElement("IMG");
+            imgPrev.setAttribute("id", "imgPrev");
+            imgPrev.setAttribute("src", "#");
+            imgPrev.setAttribute("alt", "Der Upload von Bildern steht noch nicht zur Verfügung.");
+
+            nodeULContent.appendChild(imgInput);
+            nodeULContent.appendChild(imgPrev);
 
             nodeUContent.appendChild(nodeULContent);
 
@@ -285,10 +291,7 @@ class App {
             portionInput.setAttribute("required", "true");
             portionInput.setAttribute("placeholder", "Portionen");
             portionInput.setAttribute("id", "portionInput");
-            let portSpan = document.createElement("SPAN");
-            portSpan.appendChild(document.createTextNode("Test"));
             portLi.appendChild(portionInput);
-            portLi.appendChild(portSpan);
             nodeURList.appendChild(portLi);
 
             let timeLi = document.createElement("LI");
@@ -354,7 +357,7 @@ class App {
             let btnText = document.createTextNode("Speichern");
             submitButton.appendChild(btnText);
             submitButton.setAttribute("id", "speichern");
-            submitButton.addEventListener("click", this.modalSubmit);
+            submitButton.addEventListener('click', this.modalSubmit(this.database));
             modalFooter.appendChild(submitButton);
 
 
@@ -499,18 +502,10 @@ class App {
 
     //Fehlerhaft!!
     imageSelection(event) {
-        event.stopPropagation();
-        event.preventDefault();
-
-        var bild = event.dataTransfer.files[0]; // FileList Objekt        
-
-        document.getElementsByClassName("dropzone").appendChild(document.createTextNode('Upload: ' + bild.name + ', Dateigröße: ' + bild.size + ' bytes'));
-    }
-
-    modalDragOver(event) {
-        event.stopPropagation();
-        event.preventDefault();
-        event.dataTransfer.dropEffect = 'copy';
+        if (this.files && this.files[0]) {
+            var img = document.getElementById("imgPrev"); 
+            img.src = URL.createObjectURL(this.files[0]);
+        }
     }
 
     _ingredOnKeyDown(e) {
@@ -537,11 +532,12 @@ class App {
             }
         }
     }
-
+ 
     modalSubmit(e) {
-        e.preventDefault();
-
-        let titleInput = document.getElementById("titleInput");
+        
+        let imgInput = document.getElementById("imgInput");
+        //console.log(e.encodePicture(imgInput.files[0]));
+        
         
 
     }
