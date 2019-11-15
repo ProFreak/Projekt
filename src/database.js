@@ -4,8 +4,7 @@
  * Klasse Database: Kümmert sich um die Datenhaltung der App
  * Datenbankverbindung besteht zu Google Firebase und Google Firestore für Bilder
  */
-class Database {
-
+class Database{
 
     /**
      * Konstruktor.
@@ -101,7 +100,7 @@ class Database {
     *   Codiert das eigebene Bild in base64, damit es in der DB gespeichert werden kann.
     */
     encodePicture(pic){
-        return Base64.btoa(pic.toString);
+        return readFileSync(pic, {encoding: 'base64'});
     }
 
     /*
