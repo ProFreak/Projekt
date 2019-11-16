@@ -273,6 +273,7 @@ class App {
             titleInput.setAttribute("placeholder", "Titel");
             titleInput.setAttribute("id", "titleInput");
             titleInput.setAttribute("required", "true");
+            titleInput.setAttribute("pattern", "[a-zA-Z]+");
             nodeURContent.appendChild(titleInput);
 
             //Horizontale Liste für Zeit, Portionen
@@ -289,6 +290,7 @@ class App {
             portionInput.setAttribute("placeholder", "Portionen");
             portionInput.setAttribute("id", "portionInput");
             portionInput.setAttribute("type", "number");
+            portionInput.setAttribute("min", "1");
             portLi.appendChild(portionInput);
             nodeURList.appendChild(portLi);
 
@@ -302,6 +304,7 @@ class App {
             timeInput.setAttribute("placeholder", "in min.");
             timeInput.setAttribute("id", "timeInput");
             timeInput.setAttribute("type", "number");
+            timeInput.setAttribute("min", "1");
             timeLi.appendChild(timeInput);
 
             nodeURList.appendChild(timeLi);
@@ -315,6 +318,7 @@ class App {
             restInput.setAttribute("placeholder", "in min.");
             restInput.setAttribute("id", "restInput");
             restInput.setAttribute("type", "number");
+            restInput.setAttribute("min", "1");
             restLi.appendChild(restInput);
             nodeURList.appendChild(restLi);
 
@@ -331,7 +335,9 @@ class App {
             nodeURList.appendChild(favLi);
 
             nodeURContent.appendChild(nodeURList);
-
+            let ingredSpan = document.createElement("SPAN");
+            nodeURContent.appendChild(ingredSpan);
+            ingredSpan.appendChild(document.createTextNode("Zutaten:"));
             let nodeIngedients = document.createElement("UL");
             nodeIngedients.setAttribute("id", "addIngredList");
             let ingredientLi = document.createElement("LI");
