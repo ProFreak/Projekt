@@ -253,19 +253,12 @@ class App {
             //Modal Oben Links - Bild
             let nodeULContent = document.createElement("DIV");
             nodeULContent.setAttribute("class", "modalUpperContentLeft");
-
-            let imgInput = document.createElement("INPUT");
-            imgInput.setAttribute("type", "text");
-            imgInput.setAttribute("id", "imgInput");
-            imgInput.setAttribute("placeholder", "URL / Base64-Bild")
-            imgInput.addEventListener("change", this.imageSelection);
-            let imgPrev = document.createElement("IMG");
-            imgPrev.setAttribute("id", "imgPrev");
-            imgPrev.setAttribute("src", "#");
-            imgPrev.setAttribute("alt", "Geben sie die Bildquelle oder ein Bild im Base64-Format ein.");
-
-            nodeULContent.appendChild(imgInput);
-            nodeULContent.appendChild(imgPrev);
+            let nodeImg = document.createElement("DIV");
+            nodeImg.setAttribute("class", "dropzone");
+            nodeImg.appendChild(document.createTextNode("Ziehen Sie ein Bild hierher"));
+            nodeImg.addEventListener('dragover', this.modalDragOver, false);
+            nodeImg.addEventListener('drop', this.imageSelection, false);
+            nodeULContent.appendChild(nodeImg);
 
             nodeUContent.appendChild(nodeULContent);
 
@@ -288,27 +281,40 @@ class App {
 
             let portLi = document.createElement("LI");
             let portionInput = document.createElement("INPUT");
+            let portSpan = document.createElement("SPAN");
+            portLi.appendChild(portSpan);
+            portSpan.appendChild(document.createTextNode("Portionen:"));
             portionInput.setAttribute("type", "text");
             portionInput.setAttribute("required", "true");
             portionInput.setAttribute("placeholder", "Portionen");
             portionInput.setAttribute("id", "portionInput");
+            portionInput.setAttribute("type", "number");
             portLi.appendChild(portionInput);
             nodeURList.appendChild(portLi);
 
             let timeLi = document.createElement("LI");
             let timeInput = document.createElement("INPUT");
+            let timeSpan = document.createElement("SPAN");
+            timeLi.appendChild(timeSpan);
+            timeSpan.appendChild(document.createTextNode("Zubereitungszeit:"));
             timeInput.setAttribute("type", "text");
             timeInput.setAttribute("required", "true");
-            timeInput.setAttribute("placeholder", "Zubereitungszeit (HH:MM)");
+            timeInput.setAttribute("placeholder", "in min.");
             timeInput.setAttribute("id", "timeInput");
+            timeInput.setAttribute("type", "number");
             timeLi.appendChild(timeInput);
+
             nodeURList.appendChild(timeLi);
 
             let restLi = document.createElement("LI");
             let restInput = document.createElement("INPUT");
+            let restSpan = document.createElement("SPAN");
+            restLi.appendChild(restSpan);
+            restSpan.appendChild(document.createTextNode("Ruhezeit:"));
             restInput.setAttribute("type", "text");
-            restInput.setAttribute("placeholder", "Ruhezeit (HH:MM)");
+            restInput.setAttribute("placeholder", "in min.");
             restInput.setAttribute("id", "restInput");
+            restInput.setAttribute("type", "number");
             restLi.appendChild(restInput);
             nodeURList.appendChild(restLi);
 
@@ -358,7 +364,7 @@ class App {
             let btnText = document.createTextNode("Speichern");
             submitButton.appendChild(btnText);
             submitButton.setAttribute("id", "speichern");
-            submitButton.addEventListener('click', this.modalSubmit);
+            submitButton.addEventListener("click", this.modalSubmit);
             modalFooter.appendChild(submitButton);
 
 
@@ -503,16 +509,25 @@ class App {
 
     //Fehlerhaft!!
     imageSelection(event) {
-        if(this.value !== ""){
-            document.getElementById("imgPrev").setAttribute("src", this.value);
-        }
+        event.stopPropagation();
+        event.preventDefault();
+
+        var bild = event.dataTransfer.files[0]; // FileList Objekt
+
+        document.getElementsByClassName("dropzone").appendChild(document.createTextNode('Upload: ' + bild.name + ', Dateigröße: ' + bild.size + ' bytes'));
+    }
+
+    modalDragOver(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'copy';
     }
 
     _ingredOnKeyDown(e) {
         if (this.childNodes[this.childNodes.length - 1].childNodes[0].value !== "") {
             if (e.keyCode === 13) {
             } else {
-                for(let i = 0; i < this.childNodes.length; i++){                    
+                for(let i = 0; i < this.childNodes.length; i++){
                     if(this.childNodes[i].childNodes[0].value.trim() === "") {
                         this.removeChild(this.childNodes[i]);
                     }
@@ -527,16 +542,41 @@ class App {
                 this.appendChild(ingredientLi);
             }
         } else {
-            if (e.keyCode === 13) {                
+            if (e.keyCode === 13) {
                 this.childNodes[this.childNodes.length - 1].childNodes[0].focus();
             }
         }
     }
- 
+
     modalSubmit(e) {
-        console.log("Test");
-        
-        
+        e.preventDefault();
+
+        let titleInput = document.getElementById("titleInput");
+        let check = true;
+        if(document.getElementById(titleInput).value === ""){
+          titleInput.classList.appendChild("redField");
+
+          let portSpan = document.createElement("SPAN");
+          portSpan.appendChild(document.createTextNode("Bitte überprüfen Sie Ihre Eingaben!"));
+          check = false;
+        }
+        if (document.getElementById(portionInput).value === ""){
+          portionInput.classList.appendChild("redField");
+          check = false;
+        }
+        // fehlende Bedingung, dass das Datumsformat eingehalten werden muss
+        if (document.getElementById(timeInput).value === "" || document.getElementById(timeInput).value) {
+          timeInput.classList.appendChild("redField");
+          check = false;
+        }
+        if (document.getElementById(restInput).value === "" ) {
+          restInput.classList.appendChild("redField");
+          check = false;
+        }
+
+        if(check == true){
+          // alle Eingaben korrekt, weshalb das erstellte Rezept gespeichert werden kann
+        }
 
     }
 
