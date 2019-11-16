@@ -1,123 +1,115 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Mein Rezeptbuch</title>
-        <link rel="shortcut icon" href="icon.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 
-        <!-- Google Firebase -->
-        <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-firestore.js"></script>
+<head>
+    <meta charset="utf-8" />
+    <title>Mein Rezeptbuch</title>
+    <link rel="shortcut icon" href="icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 
-        <!-- Klasse App: Steuert die gesamte Anwendung -->
-        <script src="app.js"></script>
-        <link rel="stylesheet" href="app.css" />
+    <!-- Google Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-firestore.js"></script>
 
-        <!-- Klasse Database: Verwaltet die Daten der Anwendung -->
-        <script src="database.js"></script>
+    <!-- Klasse App: Steuert die gesamte Anwendung -->
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="app.css" />
 
-        <!-- Klassen für die einzelnen App-Seiten -->
-        <script src="page-overview/page-overview.js"></script>
-        <script src="page-detail/page-detail.js"></script>
-        <script src="page-not-found/page-not-found.js"></script>
+    <!-- Klasse Database: Verwaltet die Daten der Anwendung -->
+    <script src="database.js"></script>
 
-        <!-- Fontello Icon Font (generiert auf fontello.com) -->
-        <link rel="stylesheet" href="fontello/css/fontello.css" />
+    <!-- Klassen für die einzelnen App-Seiten -->
+    <script src="page-overview/page-overview.js"></script>
+    <script src="page-not-found/page-not-found.js"></script>
 
-        <!-- Stylesheets zur Gestaltung einzelner HTML-Elemente -->
-        <link rel="stylesheet" href="elements/button.css" />
-        <link rel="stylesheet" href="elements/tab-buttons.css" />
-        <link rel="stylesheet" href="elements/form.css" />
+    <!-- Fontello Icon Font (generiert auf fontello.com) -->
+    <link rel="stylesheet" href="fontello/css/fontello.css" />
 
-        <!-- Anwendung starten -->
-        <script>
-            window.addEventListener("load",async () => {
-                let pages = [{
-                    url: "^/$",
-                    klass: PageOverview,
-                },{
-                    url: "^/Detail/(.*)$",
-                    klass: PageDetail,
-                },{
-                    url: ".*",
-                    klass: PageNotFound,
-                }];
+    <!-- Stylesheets zur Gestaltung einzelner HTML-Elemente -->
+    <link rel="stylesheet" href="elements/button.css" />
+    <link rel="stylesheet" href="elements/tab-buttons.css" />
+    <link rel="stylesheet" href="elements/form.css" />
 
-                let app = new App("Segelfreunde", pages);
-                await app.run();
+    <!-- Anwendung starten -->
+    <script>
+        window.addEventListener("load", async () => {
+            let pages = [{
+                url: "^/$",
+                klass: PageOverview,
+            }, {
+                url: "^/Favorites",
+                klass: PageFavorites
+            },
+            {
+                url: ".*",
+                klass: PageNotFound,
+            }];
 
-                //Modal schließen
-                let modal = document.getElementById("modal");
-                let close = document.getElementById("close-modal");
+            let app = new App("Rezeptbuch", pages);
+            await app.run();
 
-                close.onclick = function() {
+            //Modal schließen
+            let modal = document.getElementById("modal");
+            let close = document.getElementById("close-modal");
+
+            close.onclick = function () {
+                app.closeModal();
+            };
+
+            window.onclick = function (event) {
+                if (event.target == modal && modal.style.display !== "none") {
                     app.closeModal();
-                };
+                }
+            };
+        });
+    </script>
 
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        app.closeModal();
-                    }
-                };
+    <!-- Dummy-Element für dynamisch nachgeladene CSS-Regeln -->
+    <style id="page-css"></style>
+</head>
 
-                //nur zum Test
-                app.setModalContent("erstellen");
-            });
-
-            //noch unklar
-            async function reloadData() {
-                  deletedIds = [];
-                  let rezepte = await database.selectAllRezepte();
-                  table.replaceData(rezepte);
-              }
-        </script>
-
-        <!-- Dummy-Element für dynamisch nachgeladene CSS-Regeln -->
-        <style id="page-css"></style>
-    </head>
-    <body>
-        <!-- Dialog platzhalter für verscheidene Funktionen -->
-        <div id="modal" class="modal-container">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <span class="close" id="close-modal"><i class="icon-cancel"></i></span>
-                  <h2 id="modal-headline">Modal Header</h2>
-                </div>
-                <hr>
-                <div class="modal-body" id="modal-body">
-                </div>
-                <hr>
-                <div class="modal-footer" id="modal-footer">
-                </div>
-              </div>
+<body>
+    <!-- Dialog platzhalter für verscheidene Funktionen -->
+    <div id="modal" class="modal-container">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" id="close-modal"><i class="icon-cancel"></i></span>
+                <h2 id="modal-headline"></h2>
+            </div>
+            <hr>
+            <div class="modal-body" id="modal-body">
+            </div>
+            <hr>
+            <div class="modal-footer" id="modal-footer">
+            </div>
         </div>
-        <!-- Kopfbereich der App -->
-        <header>
-          <!-- <img class="logo" src="icon.png" alt="Logo" /> -->
-            <nav>
-                <!-- Logo, Zurück-Button und Titel der Seite -->
-                <img class="logo" src="icon.png" alt="Logo" />
+    </div>
+    <!-- Kopfbereich der App -->
+    <header>
+        <!-- <img class="logo" src="icon.png" alt="Logo" /> -->
+        <nav>
+            <!-- Logo, Zurück-Button und Titel der Seite -->
+            <img class="logo" src="icon.png" alt="Logo" />
 
-                <ul class="menu-left">
-                    <li class="go-back">
-                        <a href="#">
-                            <i class="icon-left-open"></i>
-                            <span class="page-name">Name der Seite</span>
-                        </a>
-                    </li>
-                    <li class="dont-go-back hidden">
+            <ul class="menu-left">
+                <li class="go-back">
+                    <a href="#">
+                        <i class="icon-left-open"></i>
                         <span class="page-name">Name der Seite</span>
-                    </li>
-                    <li class="toggle-menu small-screen-only">
-                        <a href="#">
-                            <i class="icon-menu"></i>
-                        </a>
-                    </li>
-                </ul>
+                    </a>
+                </li>
+                <li class="dont-go-back hidden">
+                    <span class="page-name">Name der Seite</span>
+                </li>
+                <li class="toggle-menu small-screen-only">
+                    <a href="#">
+                        <i class="icon-menu"></i>
+                    </a>
+                </li>
+            </ul>
 
-                <!-- Übergreifendes App-Menü -->
-                <!--
+            <!-- Übergreifendes App-Menü -->
+            <!--
                 <ul class="menu-right small-screen-hidden">
                     <li>
                         <a href="#/messages">
@@ -133,16 +125,17 @@
                     </li>
                 </ul>
                 -->
-            </nav>
+        </nav>
 
-            <div class="content">
-                Inhalt des Kopfbereichs
-            </div>
-        </header>
+        <div class="content">
+            Inhalt des Kopfbereichs
+        </div>
+    </header>
 
-        <!-- Hauptbereich mit dem Inhalt der einzelnen Seiten -->
-        <main id="app-main-area">
-            Inhalt des Hauptbereichs
-        </main>
-    </body>
+    <!-- Hauptbereich mit dem Inhalt der einzelnen Seiten -->
+    <main id="app-main-area">
+        Inhalt des Hauptbereichs
+    </main>
+</body>
+
 </html>
