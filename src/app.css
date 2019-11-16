@@ -123,6 +123,7 @@ body {
 }
 
 
+
 /*
  * KOPFBEREICH
  */
@@ -139,8 +140,17 @@ header h1 {
   font-family: 'Julius Sans One', sans-serif; /*gerade, groß*/
 }
 header nav {
-    padding: var(--content-padding);
+    overflow: hidden;
+    padding: 0.5em;
     color: var(--text-color);
+    position: fixed;
+    top:0;
+    width: 100%;
+    z-index:100;
+    background-image: url("background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 header nav i {
@@ -159,6 +169,7 @@ header nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-right: 3em;
 }
 
 header nav li {
@@ -276,6 +287,11 @@ main {
     padding: var(--content-padding);
     background: rgba(240,240,240, 0.15);
     flex: 1;
+    color: white;
+
+    /*z-index: 9;*/
+    /*Abstand damit Navigationsleiste nicht Main Content überlappt */
+
 }
 
 main a,
@@ -288,6 +304,7 @@ main a:visited {
 main a:hover {
     color: red;
 }
+* {box-sizing:border-box}
 
 /*
 *   Dialogfenster Erstellen / Detailansicht
