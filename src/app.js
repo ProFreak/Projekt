@@ -274,12 +274,20 @@ class App {
             //Modal Oben Links - Bild
             let nodeULContent = document.createElement("DIV");
             nodeULContent.setAttribute("class", "modalUpperContentLeft");
-            let nodeImg = document.createElement("DIV");
-            nodeImg.setAttribute("class", "dropzone");
-            nodeImg.appendChild(document.createTextNode("Ziehen Sie ein Bild hierher"));
-            nodeImg.addEventListener('dragover', this.modalDragOver, false);
-            nodeImg.addEventListener('drop', this.imageSelection, false);
-            nodeULContent.appendChild(nodeImg);
+            let imgInput = document.createElement("INPUT");
+            imgInput.setAttribute("type", "text");
+            imgInput.setAttribute("id", "imgInput");
+            imgInput.setAttribute("placeholder", "URL / Base64-Bild")
+            imgInput.addEventListener("change", this.imageSelection);
+            let imgPrev = document.createElement("IMG");
+            imgPrev.setAttribute("id", "imgPrev");
+            imgPrev.setAttribute("src", "#");
+            imgPrev.setAttribute("alt", "Geben sie die Bildquelle oder ein Bild im Base64-Format ein.");
+
+            nodeULContent.appendChild(imgInput);
+            nodeULContent.appendChild(imgPrev);
+
+            nodeUContent.appendChild(nodeULContent);
 
             nodeUContent.appendChild(nodeULContent);
 
