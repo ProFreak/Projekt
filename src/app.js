@@ -522,6 +522,7 @@ class App {
     closeModal() {
         let modal = document.getElementById("modal");
         let modalBody = document.getElementById("modal-body");
+        let modalFooter = document.getElementById("modal-footer");
 
         //Typcheck und Doppelte Schließ-Frage!!!
         if (modal.classList.contains("erstellen")) {
@@ -533,6 +534,7 @@ class App {
                     modalBody.removeChild(modalBody.firstChild);
                 }
                 modalBody.innerHTML = "";
+                modalFooter.innerHTML = "";
             }
         } else {
             modal.style.display = "none";
