@@ -269,6 +269,9 @@ class App {
 
             //Eingabe für Titel
             let titleInput = document.createElement("INPUT");
+            let titleSpan = document.createElement("SPAN");
+            nodeURContent.appendChild(titleSpan);
+            titleSpan.appendChild(document.createTextNode("Titel:"));
             titleInput.setAttribute("type", "text");
             titleInput.setAttribute("placeholder", "Titel");
             titleInput.setAttribute("id", "titleInput");
@@ -327,15 +330,16 @@ class App {
             let favIcon = document.createElement("I");
             favIcon.setAttribute("class", "icon-heart");
             favIcon.setAttribute("href","heart");
-            favInput.setAttribute("type", "checkbox");
-            favInput.setAttribute("id", "favInput");
+            favIcon.setAttribute("id","setFav");
+            favIcon.addEventListener("click", this.setFav);
+
             let favSpan = document.createElement("SPAN");
+            favLi.appendChild(favSpan);
             favSpan.setAttribute("id", "favInputSpan");
             let favText = document.createTextNode("Favorit");
             favLi.appendChild(favIcon);
             favSpan.appendChild(favText);
-            favLi.appendChild(favSpan);
-            favLi.appendChild(favInput);
+
             nodeURList.appendChild(favLi);
 
             nodeURContent.appendChild(nodeURList);
@@ -556,6 +560,25 @@ class App {
                 this.childNodes[this.childNodes.length - 1].childNodes[0].focus();
             }
         }
+    }
+
+
+    setFav(){
+
+        let setFavIcon = document.getElementById("setFav");
+
+
+
+        if(setFavIcon.classList.contains("icon-heart")){
+            setFavIcon.setAttribute("class", "icon-heart-filled");
+
+
+        }
+        else if(setFavIcon.classList.contains("icon-heart-filled")) {
+            setFavIcon.setAttribute("class", "icon-heart");
+        }
+
+
     }
 
     modalSubmit(e) {
