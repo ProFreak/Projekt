@@ -52,7 +52,7 @@ class Database{
                 rezeptliste.push(data);
             });
             //Hilfsarray alphabetisch sortieren
-            rezeptliste.sort((a, b) => this._sortAlphaNum(a.titel, b.titel));            
+            rezeptliste.sort((a, b) => this._sortAlphaNum(a.titel, b.titel));
         })
             .catch((err) => { //Fehler bei DB-Zugriff abfangen
                 console.log('Error getting documents', err);
@@ -63,11 +63,11 @@ class Database{
     }
 
     // Gibt alle Rezepte zurück, die als Favorit gekennzeichnet wurden
-    getAllFavorites(){
+    getAllNotFavorites(){
       let rezeptliste = this._recipes;
       let favoritenliste = [];
       for(let i = 0; i < rezeptliste.length(); i++){
-        if(rezeptliste[i].favorit){
+        if(!rezeptliste[i].favorit){
           favoritenliste.push(rezeptliste[i]);
         }
       }
@@ -108,7 +108,7 @@ class Database{
     */
     getRecipeByName(titel) {
         let tmp = null;
-        
+
         //Rezeptliste nach passendem Rezept mit übereinstimmendem Titel durchsuchen
         for(let i = 0; i < this._recipes.length; i++){
             if(this._recipes[i].titel == titel){
@@ -125,7 +125,7 @@ class Database{
     */
     getRecipeById(id) {
         let tmp = null;
-        
+
         //Rezeptliste nach passendem Rezept mit der korrekten ID durchsuchen
         for(let i = 0; i < this._recipes.length; i++){
             if(this._recipes[i].id == id){
