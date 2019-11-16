@@ -10,6 +10,7 @@ class PageOverview {
      */
     constructor(app) {
         this._app = app;
+        this._slideIndex = 1;
     }
 
     /**
@@ -27,12 +28,11 @@ class PageOverview {
             console.error("Fehler beim Laden des HTML/CSS-Inhalts");
             return;
         }
-
         // Seite zur Anzeige bringen
         let pageDom = document.createElement("div");
         pageDom.innerHTML = html;
-
-        this._renderBoatTiles(pageDom);
+        
+        this._renderRecipes(pageDom);
 
         this._app.setPageTitle("Mein Rezeptbuch");
         this._app.setPageCss(css);
@@ -47,18 +47,20 @@ class PageOverview {
      * @param {HTMLElement} pageDom Wurzelelement der eingelesenen HTML-Datei
      * mit den HTML-Templates dieser Seite.
      */
-    _renderBoatTiles(pageDom) {
+    _renderRecipes(pageDom) {
         let mainElement = pageDom.querySelector("main");
         let templateElement = pageDom.querySelector("#template-tile");
-        /*
-        this._app.database.getAllRecords().forEach(boat => {
+        
+        this._app.database._recipes.forEach(recipe => {
             let html = templateElement.innerHTML;
-            html = html.replace("{HREF}", `#/Detail/${boat.id}`);
-            html = html.replace("{IMG}", boat.img);
-            html = html.replace("{NAME}", boat.name);
-
+            html = html.replace("{HREF}", `#/Detail/${recipe.id}`);
+            html = html.replace("{IMG}", recipe.bild);
+            html = html.replace("{NAME}", recipe.titel);
+            html = html.replace("{PORTIONS}", recipe.portionen);
+            html = html.replace("{TIME}", recipe.zubereitungszeit);
+            
             mainElement.innerHTML += html;
         });
-        */
+        
     }
 }
