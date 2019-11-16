@@ -44,11 +44,29 @@ html {
     html {
         font-size: 15pt;
     }
+    input {
+      font-size: 15px;
+    }
+    textarea{
+      font-size: 15px;
+    }
+    #addIngredList input{
+      font-size: 15px;
+    }
 }
 
 @media (min-width: 60em) {
     html {
         font-size: 16pt;
+    }
+    input {
+      font-size: 16px;
+    }
+    textarea{
+      font-size: 16px;
+    }
+    #addIngredList input{
+      font-size: 16px;
     }
 
     /* Inhaltsbereich des Dialogfensters */
@@ -110,6 +128,15 @@ html {
 @media (min-width: 80em) {
     html {
         font-size: 18pt;
+    }
+    input {
+      font-size: 18px;
+    }
+    textarea{
+      font-size: 18px;
+    }
+    #addIngredList input{
+      font-size: 18px;
     }
 }
 
@@ -452,7 +479,15 @@ body .modal-container{
   font-family: 'Quicksand', sans-serif;
 }
 
-#modalLowerContent textarea{
+#imgInput{
+  border: 1px solid gainsboro;
+  color: black;
+  margin-top: 5px;
+  height: 3em;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.modalLowerContent textarea{
   border: 1px solid gainsboro;
   color: black;
   margin-top: 10px;
