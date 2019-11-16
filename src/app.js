@@ -324,16 +324,15 @@ class App {
 
             let favLi = document.createElement("LI");
             let favInput = document.createElement("INPUT");
-            let favIcon = document.createElement("LINK");
-            favIcon.setAttribute("rel","unfavorized");
-            favIcon.setAttribute("type", "image/x-icon");
+            let favIcon = document.createElement("I");
+            favIcon.setAttribute("class", "icon-heart");
             favIcon.setAttribute("href","heart");
             favInput.setAttribute("type", "checkbox");
             favInput.setAttribute("id", "favInput");
             let favSpan = document.createElement("SPAN");
             favSpan.setAttribute("id", "favInputSpan");
             let favText = document.createTextNode("Favorit");
-
+            favLi.appendChild(favIcon);
             favSpan.appendChild(favText);
             favLi.appendChild(favSpan);
             favLi.appendChild(favInput);
