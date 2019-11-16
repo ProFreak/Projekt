@@ -401,3 +401,7 @@ body .modal-container{
     text-align: center;
     background: grey;
 }
+
+.redField{
+  background-color: rgba(255, 0, 0, 0.5);
+}

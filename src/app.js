@@ -502,7 +502,7 @@ class App {
         event.stopPropagation();
         event.preventDefault();
 
-        var bild = event.dataTransfer.files[0]; // FileList Objekt        
+        var bild = event.dataTransfer.files[0]; // FileList Objekt
 
         document.getElementsByClassName("dropzone").appendChild(document.createTextNode('Upload: ' + bild.name + ', Dateigröße: ' + bild.size + ' bytes'));
     }
@@ -517,7 +517,7 @@ class App {
         if (this.childNodes[this.childNodes.length - 1].childNodes[0].value !== "") {
             if (e.keyCode === 13) {
             } else {
-                for(let i = 0; i < this.childNodes.length; i++){                    
+                for(let i = 0; i < this.childNodes.length; i++){
                     if(this.childNodes[i].childNodes[0].value.trim() === "") {
                         this.removeChild(this.childNodes[i]);
                     }
@@ -532,7 +532,7 @@ class App {
                 this.appendChild(ingredientLi);
             }
         } else {
-            if (e.keyCode === 13) {                
+            if (e.keyCode === 13) {
                 this.childNodes[this.childNodes.length - 1].childNodes[0].focus();
             }
         }
@@ -542,7 +542,31 @@ class App {
         e.preventDefault();
 
         let titleInput = document.getElementById("titleInput");
-        
+        let check = true;
+        if(document.getElementById(titleInput).value === ""){
+          titleInput.classList.appendChild("redField");
+          
+          let portSpan = document.createElement("SPAN");
+          portSpan.appendChild(document.createTextNode("Bitte überprüfen Sie Ihre Eingaben!"));
+          check = false;
+        }
+        if (document.getElementById(portionInput).value === ""){
+          portionInput.classList.appendChild("redField");
+          check = false;
+        }
+        // fehlende Bedingung, dass das Datumsformat eingehalten werden muss
+        if (document.getElementById(timeInput).value === "" || document.getElementById(timeInput).value) {
+          timeInput.classList.appendChild("redField");
+          check = false;
+        }
+        if (document.getElementById(restInput).value === "" ) {
+          restInput.classList.appendChild("redField");
+          check = false;
+        }
+
+        if(check == true){
+          // alle Eingaben korrekt, weshalb das erstellte Rezept gespeichert werden kann
+        }
 
     }
 
