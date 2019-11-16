@@ -391,6 +391,10 @@ body .modal-container{
 
 #titleInput {
     width: 100%;
+    float: left;
+    border-width: thick;
+    margin: auto;
+    margin-top: 10px;
 }
 
 /* Bild hochladen */
