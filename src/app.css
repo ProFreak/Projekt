@@ -404,13 +404,60 @@ body .modal-container{
     width: 100%;
     min-height: 5em;
 }
+#portionInput{
+  border: 1px solid gainsboro;
+  color: black;
+  margin: auto;
+  margin-top: 3px;
+  height: 2.5em;
+  border: 1px solid gainsboro;
+  font-family: 'Quicksand', sans-serif;
+}
+
+#restInput{
+    border: 1px solid gainsboro;
+    color: black;
+    margin: auto;
+    margin-top: 3px;
+    height: 2.5em;
+    font-family: 'Quicksand', sans-serif;
+}
+
+#timeInput{
+    border: 1px solid gainsboro;
+    color: black;
+    margin: auto;
+    margin-top: 3px;
+    height: 2.5em;
+    font-family: 'Quicksand', sans-serif;
+}
 
 #titleInput {
     width: 100%;
     float: left;
-    border-width: thick;
+    border: 1px solid gainsboro;
+    color: black;
     margin: auto;
     margin-top: 10px;
+    height: 3em;
+    font-family: 'Covered By Your Grace', cursive;
+    font-size: 18px;
+}
+
+#addIngredList input{
+  border: 1px solid gainsboro;
+  color: black;
+  margin-top: 5px;
+  height: 3em;
+  font-family: 'Quicksand', sans-serif;
+}
+
+#modalLowerContent textarea{
+  border: 1px solid gainsboro;
+  color: black;
+  margin-top: 10px;
+  height: 3em;
+  font-family: 'Quicksand', sans-serif;
 }
 
 /* Bild hochladen */
