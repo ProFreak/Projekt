@@ -31,26 +31,13 @@ class PageOverview {
         // Seite zur Anzeige bringen
         let pageDom = document.createElement("div");
         pageDom.innerHTML = html;
-
-        let prevLink = pageDom.querySelector(".prev");
-        prevLink.addEventListener("click", () => this._plusSlides(-1));
-
-        let nextLink = pageDom.querySelector(".next");
-        nextLink.addEventListener("click", () => this._plusSlides(1));
-
-        let dotLinks = pageDom.querySelectorAll(".dot");
-
-        for (let i = 0; i < dotLinks.length; i++) {
-            let dotLink = dotLinks[i];
-            dotLink.addEventListener("click", () => this._showSlide(i + 1));
-        }
+        
+        this._renderRecipes(pageDom);
 
         this._app.setPageTitle("Mein Rezeptbuch");
         this._app.setPageCss(css);
         this._app.setPageHeader(pageDom.querySelector("header"));
         this._app.setPageContent(pageDom.querySelector("main"));
-
-        this._showSlide(this._slideIndex);
     }
 
     /**
@@ -60,7 +47,7 @@ class PageOverview {
      * @param {HTMLElement} pageDom Wurzelelement der eingelesenen HTML-Datei
      * mit den HTML-Templates dieser Seite.
      */
-    _renderBoatTiles(pageDom) {
+    _renderRecipes(pageDom) {
         let mainElement = pageDom.querySelector("main");
         let templateElement = pageDom.querySelector("#template-tile");
         
@@ -75,9 +62,5 @@ class PageOverview {
             mainElement.innerHTML += html;
         });
         
-    }
-
-    _plusSlides(n) {
-        this._showSlide(this._slideIndex += n);
     }
 }

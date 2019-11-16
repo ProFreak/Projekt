@@ -146,7 +146,6 @@ header nav {
     position: fixed;
     top:0;
     width: 100%;
-    z-index:100;
     background-image: url("background.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -291,7 +290,7 @@ main {
 
     /*z-index: 9;*/
     /*Abstand damit Navigationsleiste nicht Main Content überlappt */
-
+    margin-top: 1em;
 }
 
 main a,
@@ -317,7 +316,7 @@ body .modal-container{
     background: rgba(37, 34, 34, 0.9);
     border: none;
     position: fixed; /* Fixe Position */
-    z-index: 1; /* Oberste Schicht der Seite */
+    z-index: 10; /* Oberste Schicht der Seite */
     left: 0;
     top: 0;
     overflow: auto; /* Scrollbar, wenn nötig */

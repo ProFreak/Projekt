@@ -537,7 +537,6 @@ class App {
         }
     }
 
-    //Fehlerhaft!!
     imageSelection(event) {
         if (this.value !== "") {
             document.getElementById("imgPrev").setAttribute("src", this.value);
