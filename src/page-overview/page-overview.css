@@ -2,6 +2,10 @@
  * Stylesheet zur Klasse PageOverview: Startseite der App
  */
 
+ #template-tile{
+     display: none;
+ }
+
 .tile {
     display: inline-block;
 
@@ -13,6 +17,8 @@
     transition: transform 0.5s, background 0.5s;
     transform: scale(1);
 }
+
+
 
 .tile img {
     width: 10em;
@@ -33,3 +39,9 @@
     transform: scale(1.1) ;
     cursor: pointer;
 }
+
+.overview-details li{
+    float: left;
+    list-style: none;
+    padding-right: 10px;
+  }

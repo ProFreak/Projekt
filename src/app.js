@@ -49,8 +49,8 @@ class App {
 
         // Single Page Router starten und die erste Seite aufrufen
         window.addEventListener("hashchange", () => this._handleRouting());
-        this._handleRouting();
         await this.database.getAllRecipes();
+        this._handleRouting();
     }
 
     /**
@@ -102,9 +102,20 @@ class App {
      */
     _handleRouting() {
         let pageUrl = location.hash.slice(1);
+        let id = "";
 
         if (pageUrl.length === 0) {
             pageUrl = "/";
+        }
+
+        if (pageUrl.split("/")[1] === "Detail") {
+            id = pageUrl.split("/")[2];
+            window.location.hash = "/";
+        }
+
+        if(pageUrl.split("/")[1] === "Favorites" && pageUrl.split("/").length === 3){
+            id = pageUrl.split("/")[2];
+            window.location.hash = "/";
         }
 
         let matches = null;
@@ -117,6 +128,10 @@ class App {
 
         this._currentPageObject = new page.klass(this);
         this._currentPageObject.show(matches);
+
+        if(id !== ""){
+            this.setModalContent(id);
+        }
     }
 
     /**
@@ -236,6 +251,12 @@ class App {
         let headline = document.getElementById("modal-headline");
         let modalBody = document.getElementById("modal-body");
         let modalFooter = document.getElementById("modal-footer");
+
+        //Sicherstellen, dass Modal leer ist
+        if (modal.classList.contains("erstellen")) {
+            modal.classList.remove("erstellen");
+        }
+        this.closeModal();
 
         //Close-Button
         let close = document.getElementsByClassName("close")[0];
@@ -503,24 +524,23 @@ class App {
                 while (modalBody.firstChild) {
                     modalBody.removeChild(modalBody.firstChild);
                 }
+                modalBody.innerHTML = "";
             }
         } else {
             modal.style.display = "none";
 
-            while (modalBody.firstChild) {
+            while (modalBody.childNodes.length > 0) {
                 modalBody.removeChild(modalBody.firstChild);
             }
+
+            modalBody.innerHTML = "";
         }
     }
 
-    //Fehlerhaft!!
     imageSelection(event) {
-        event.stopPropagation();
-        event.preventDefault();
-
-        var bild = event.dataTransfer.files[0]; // FileList Objekt
-
-        document.getElementsByClassName("dropzone").appendChild(document.createTextNode('Upload: ' + bild.name + ', Dateigröße: ' + bild.size + ' bytes'));
+        if (this.value !== "") {
+            document.getElementById("imgPrev").setAttribute("src", this.value);
+        }
     }
 
     modalDragOver(event) {
@@ -533,8 +553,8 @@ class App {
         if (this.childNodes[this.childNodes.length - 1].childNodes[0].value !== "") {
             if (e.keyCode === 13) {
             } else {
-                for(let i = 0; i < this.childNodes.length; i++){
-                    if(this.childNodes[i].childNodes[0].value.trim() === "") {
+                for (let i = 0; i < this.childNodes.length; i++) {
+                    if (this.childNodes[i].childNodes[0].value.trim() === "") {
                         this.removeChild(this.childNodes[i]);
                     }
                 }
