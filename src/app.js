@@ -318,7 +318,7 @@ class App {
             restInput.setAttribute("placeholder", "in min.");
             restInput.setAttribute("id", "restInput");
             restInput.setAttribute("type", "number");
-            restInput.setAttribute("min", "1");
+            restInput.setAttribute("min", "0");
             restLi.appendChild(restInput);
             nodeURList.appendChild(restLi);
 
