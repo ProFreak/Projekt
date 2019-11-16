@@ -417,3 +417,7 @@ body .modal-container{
     text-align: center;
     background: grey;
 }
+
+#erstellen :hover{
+    cursor: pointer;
+}

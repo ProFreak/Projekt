@@ -51,6 +51,11 @@
             //Modal schließen
             let modal = document.getElementById("modal");
             let close = document.getElementById("close-modal");
+            let erstellen = document.getElementById("erstellen");
+
+            erstellen.onclick = function(){
+                app.setModalContent("erstellen");
+            };
 
             close.onclick = function () {
                 app.closeModal();
@@ -117,16 +122,16 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#/favoriten">
+                        <a href="#/Favorites">
                             <i class="icon-heart"></i>
                             <span class="small-screen-only">Favoriten</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#/add">
+                        <div id="erstellen">
                             <i class="icon-plus"></i>
                             <span class="small-screen-only">Erstellen</span>
-                        </a>
+                        </div>
                     </li>
                 </ul>
         </nav>
