@@ -33,9 +33,9 @@
     <!-- Anwendung starten -->
     <script>
         let sucheEvent = document.getElementById("sucheInput");
-        sucheEvent.addEventListener("keydown", async () => {
+        //sucheEvent.addEventListener("keydown", async () => {
           
-        });
+        //});
 
 
         window.addEventListener("load", async () => {
@@ -61,19 +61,27 @@
             let suchen = document.getElementById("suchen");
             let submit = document.getElementById("hiddenSubmitButton");
 
+            /*
             suchen.onclick = function(){
               let sucheInput = document.getElementById("searchInput");
               if(sucheInput.style.display = "none"){
                 sucheInput.style.display = "inline";
               }
             };
-
-            submit.onclick = function(){ 
-                let recipe = JSON.stringify(submit.title)
-                console.log(recipe);
+            */
+            submit.onclick = async function(){ 
+                console.log(submit.title);
                 
-                app.database.addRecipe();
+                let recipe = JSON.parse(submit.title);
+                let tmp = recipe.zutaten[0];
+                recipe.zutaten = [];
+                tmp.split(",").forEach(a => {
+                    recipe.zutaten.push(a);
+                });
                 
+                await app.database.addRecipe(recipe);
+                modal.classList.remove("erstellen");
+                app.closeModal();
             };
 
             erstellen.onclick = function(){
@@ -144,6 +152,7 @@
 
             <!-- Übergreifendes App-Menü -->
                 <ul class="menu-right small-screen-hidden">
+                    <!--
                     <li>
                         <div id="suchen">
                             <input type="text" placeholder="Suche" id="searchInput" required="false" pattern="[a-zA-Z]+"></input>
@@ -151,14 +160,15 @@
                             <span class="small-screen-only">Suchen</span>
                         </div>
                     </li>
+                -->
                     <li>
-                        <a href="#/Favorites">
+                        <a href="#/Favorites" title="Favoriten anzeigen">
                             <i class="icon-heart" id="menu_heart"></i>
                             <span class="small-screen-only">Favoriten</span>
                         </a>
                     </li>
                     <li>
-                        <div id="erstellen">
+                        <div id="erstellen" title="neues Rezept anlegen">
                             <i class="icon-plus"></i>
                             <span class="small-screen-only">Erstellen</span>
                         </div>

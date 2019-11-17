@@ -78,11 +78,13 @@ class Database{
 
     /*
     *   Fügt ein Rezept in JSON-Form der DB hinzu und generiert automatisch eine ID
+    *   Lädt Daten automatisch neu
     */
     addRecipe(recipe) {
         this._db.collection('rezepte').add(recipe).then(ref => {
             console.log('Added document with ID: ', ref.id);
         });
+        this.getAllRecipes();
     }
 
     /*

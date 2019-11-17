@@ -305,7 +305,7 @@ class App {
             titleInput.setAttribute("placeholder", "Titel");
             titleInput.setAttribute("id", "titleInput");
             titleInput.setAttribute("required", "true");
-            titleInput.setAttribute("pattern", "[a-zA-Z]+");
+            //titleInput.setAttribute("pattern", "[a-zA-Z]+");
             nodeURContent.appendChild(titleInput);
 
             //Horizontale Liste für Zeit, Portionen
@@ -622,37 +622,86 @@ class App {
         let restInput =  document.getElementById("restInput");
         let manualInput = document.getElementById("manual");
         let pictureInput = document.getElementById("imgInput");
-        let favorit = document.getElementById("setfav");
+        let favorit = document.getElementById("setFav");
         let ingredList = document.getElementById("addIngredList");
         let check = true;
         
+        let time = "";
+        let restTime = "";
+
         if(titleInput.value === ""){
           titleInput.classList.add("redField");
 
           check = false;
         }
         if (portionInput.value === ""){
+
           portionInput.classList.add("redField");
           check = false;
         }
-        // fehlende Bedingung, dass das Datumsformat eingehalten werden muss
-        if (timeInput.value === "" || timeInput.value) {
+
+        if (timeInput.value === "") {
+
           timeInput.classList.add("redField");
           check = false;
+        } else {
+            let h = Math.round(parseInt(timeInput.value) / 60);
+            let m = Math.round(parseInt(timeInput.value) % 60);
+            if(h < 10){
+                time += "0"+h;
+            } else {
+                time += h;
+            }
+            time += ":";
+            if(m < 10){
+                time += "0"+m;
+            } else {
+                time += m;
+            }
         }
-        if (restInput.value === "" ) {
-          restInput.classList.add("redField");
+        if(ingredList.childNodes.length < 2){
+
+            ingredList.classList.add("redField");
           check = false;
         }
+        if(manualInput.value === ""){
 
-        if(check !== true){
+            manualInput.classList.add("redField");
+          check = false;
+        }
+        if(restInput.value !== ""){
+            let h = Math.round(parseInt(restInput.value) / 60);
+            let m = Math.round(parseInt(restInput.value) % 60);
+            if(h < 10){
+                restTime += "0"+h;
+            } else {
+                restTime += h;
+            }
+            restTime += ":";
+            if(m < 10){
+                restTime += "0"+m;
+            } else {
+                restTime += m;
+            }
+        }
+
+        if(check === true){
           // alle Eingaben korrekt, weshalb das erstellte Rezept gespeichert werden kann
           let ingredients = [];
-          ingredList.forEach(a => {
-            ingredients.push(a.value);
+
+          if(favorit.classList.contains("icon-heart")){
+              favorit = "false";
+          } else {
+              favorit = "true";
+          }
+          
+          ingredList.childNodes.forEach(a => {  
+              if(a.firstChild.value !== ""){            
+                ingredients.push(a.firstChild.value);
+              }
           });   
 
-          let recipe = "{titel:" + titleInput.value + ", anleitung:" + manualInput.value + ", bild:" + pictureInput.value + ", favorit:" + favorit.checked + ", portionen:" + portionInput.value + ", zubereitungszeit:" + timeInput.value + ", zutaten: [" + ingredients.toString() + "]}";
+          let recipe = '{"titel":"' + titleInput.value + '", "ruhezeit":"' + restTime + '", "anleitung":"' + manualInput.value + '", "bild":"' + pictureInput.value + '", "favorit":"' + favorit + '", "portionen":"' + portionInput.value + '", "zubereitungszeit":"' + time + '", "zutaten": ["' + ingredients + '"]}';
             document.getElementById("hiddenSubmitButton").title = recipe;     
           document.getElementById("hiddenSubmitButton").click();
         } else {
