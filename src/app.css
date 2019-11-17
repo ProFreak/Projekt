@@ -109,7 +109,7 @@ html {
     * Zubereitungsliste, Portionen, Zeit, Dauer
     */
     .modalUpperContentRight{
-
+      margin-left : 1em;
     }
 
     .modal-right-header li{
@@ -180,6 +180,7 @@ header nav {
     padding: 0.5em;
     color: var(--text-color);
     position: fixed;
+    z-index: 1;
     top:0;
     width: 100%;
     background-image: url("background.jpg");
@@ -386,6 +387,10 @@ body .modal-container{
   width: 100%;
 }
 
+.modalUpperContentRight {
+  margin-left: 1em;
+}
+
 .modalUpperContentRight li{
   list-style: none;
   margin: auto;
@@ -432,6 +437,10 @@ body .modal-container{
 
 .erstellen input{
     display: block;
+}
+
+.redField {
+  border: 1px red;
 }
 
 #favInput{
@@ -509,15 +518,10 @@ body .modal-container{
   font-family: 'Quicksand', sans-serif;
 }
 
-/* Bild hochladen */
-.dropzone{
-    width: 100%;
-    height: 100%;
-    min-height: 10em;
-    text-align: center;
-    background: grey;
-}
-
 #erstellen :hover{
     cursor: pointer;
+}
+
+#hiddenSubmitButton{
+  display: none;
 }

@@ -115,7 +115,7 @@ class App {
 
         if(pageUrl.split("/")[1] === "Favorites" && pageUrl.split("/").length === 3){
             id = pageUrl.split("/")[2];
-            window.location.hash = "/";
+            window.location.hash = "/Favorites";
         }
 
         let matches = null;
@@ -397,20 +397,21 @@ class App {
             nodeLContent.setAttribute("class", "modalLowerContent");
             let manualInput = document.createElement("TEXTAREA");
             manualInput.setAttribute("placeholder", "Zubereitungsanleitung");
+            manualInput.setAttribute("id", "manual");
             nodeLContent.appendChild(manualInput);
 
 
             modalBody.appendChild(nodeUContent);
             modalBody.appendChild(nodeLContent);
 
+            //######################################
+            //Submit Button
             let submitButton = document.createElement("BUTTON");
             let btnText = document.createTextNode("Speichern");
             submitButton.appendChild(btnText);
             submitButton.setAttribute("id", "speichern");
             submitButton.addEventListener("click", this.modalSubmit);
             modalFooter.appendChild(submitButton);
-
-
 
         } else {
             //Detail-Modal definieren
@@ -552,6 +553,7 @@ class App {
             }
 
             modalBody.innerHTML = "";
+            modalFooter.innerHTML = "";
         }
     }
 
@@ -615,30 +617,49 @@ class App {
         e.preventDefault();
 
         let titleInput = document.getElementById("titleInput");
+        let portionInput = document.getElementById("portionInput");
+        let timeInput = document.getElementById("timeInput");
+        let restInput =  document.getElementById("restInput");
+        let manualInput = document.getElementById("manual");
+        let pictureInput = document.getElementById("imgInput");
+        let favorit = document.getElementById("setfav");
+        let ingredList = document.getElementById("addIngredList");
         let check = true;
-        if(document.getElementById(titleInput).value === ""){
-          titleInput.classList.appendChild("redField");
+        
+        if(titleInput.value === ""){
+          titleInput.classList.add("redField");
 
-          let portSpan = document.createElement("SPAN");
-          portSpan.appendChild(document.createTextNode("Bitte überprüfen Sie Ihre Eingaben!"));
           check = false;
         }
-        if (document.getElementById(portionInput).value === ""){
-          portionInput.classList.appendChild("redField");
+        if (portionInput.value === ""){
+          portionInput.classList.add("redField");
           check = false;
         }
         // fehlende Bedingung, dass das Datumsformat eingehalten werden muss
-        if (document.getElementById(timeInput).value === "" || document.getElementById(timeInput).value) {
-          timeInput.classList.appendChild("redField");
+        if (timeInput.value === "" || timeInput.value) {
+          timeInput.classList.add("redField");
           check = false;
         }
-        if (document.getElementById(restInput).value === "" ) {
-          restInput.classList.appendChild("redField");
+        if (restInput.value === "" ) {
+          restInput.classList.add("redField");
           check = false;
         }
 
-        if(check == true){
+        if(check !== true){
           // alle Eingaben korrekt, weshalb das erstellte Rezept gespeichert werden kann
+          let ingredients = [];
+          ingredList.forEach(a => {
+            ingredients.push(a.value);
+          });   
+
+          let recipe = "{titel:" + titleInput.value + ", anleitung:" + manualInput.value + ", bild:" + pictureInput.value + ", favorit:" + favorit.checked + ", portionen:" + portionInput.value + ", zubereitungszeit:" + timeInput.value + ", zutaten: [" + ingredients.toString() + "]}";
+            document.getElementById("hiddenSubmitButton").title = recipe;     
+          document.getElementById("hiddenSubmitButton").click();
+        } else {
+          let portSpan = document.createElement("SPAN");
+          portSpan.appendChild(document.createTextNode("Bitte überprüfen Sie Ihre Eingaben!"));
+
+          document.getElementById("modal-footer").appendChild(portSpan);
         }
 
     }

@@ -59,12 +59,21 @@
             let close = document.getElementById("close-modal");
             let erstellen = document.getElementById("erstellen");
             let suchen = document.getElementById("suchen");
+            let submit = document.getElementById("hiddenSubmitButton");
 
             suchen.onclick = function(){
               let sucheInput = document.getElementById("searchInput");
               if(sucheInput.style.display = "none"){
                 sucheInput.style.display = "inline";
               }
+            };
+
+            submit.onclick = function(){ 
+                let recipe = JSON.stringify(submit.title)
+                console.log(recipe);
+                
+                app.database.addRecipe();
+                
             };
 
             erstellen.onclick = function(){
@@ -101,6 +110,7 @@
             <hr>
             <div class="modal-footer" id="modal-footer">
             </div>
+            <input type="button" id="hiddenSubmitButton"> <!-- Versteckter Submit button (quick & dirty Lösung zum Formular absenden (i´m sorry))-->
         </div>
     </div>
     <!-- Kopfbereich der App -->
