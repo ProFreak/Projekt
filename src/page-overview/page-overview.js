@@ -31,8 +31,18 @@ class PageOverview {
         // Seite zur Anzeige bringen
         let pageDom = document.createElement("div");
         pageDom.innerHTML = html;
-        
+
+        if(window.location.hash === "#/Favorites"){
+        this._renderFavorites(pageDom);
+        let herzIcon = document.getElementById("menu_heart");
+        herzIcon.classList.remove("icon-heart");
+        herzIcon.classList.add("icon-heart-filled");
+      } else {
         this._renderRecipes(pageDom);
+        let herzIcon = document.getElementById("menu_heart");
+        herzIcon.classList.remove("icon-heart-filled");
+        herzIcon.classList.add("icon-heart");
+      }      
 
         this._app.setPageTitle("Mein Rezeptbuch");
         this._app.setPageCss(css);
@@ -50,7 +60,7 @@ class PageOverview {
     _renderRecipes(pageDom) {
         let mainElement = pageDom.querySelector("main");
         let templateElement = pageDom.querySelector("#template-tile");
-        
+
         this._app.database._recipes.forEach(recipe => {
             let html = templateElement.innerHTML;
             html = html.replace("{HREF}", `#/Detail/${recipe.id}`);
@@ -58,9 +68,26 @@ class PageOverview {
             html = html.replace("{NAME}", recipe.titel);
             html = html.replace("{PORTIONS}", recipe.portionen);
             html = html.replace("{TIME}", recipe.zubereitungszeit);
-            
+
             mainElement.innerHTML += html;
         });
-        
+
+    }
+
+    _renderFavorites(pageDom) {
+        let mainElement = pageDom.querySelector("main");
+        let templateElement = pageDom.querySelector("#template-tile");
+
+        this._app.database.getAllFavorites().forEach(recipe => {
+            let html = templateElement.innerHTML;
+            html = html.replace("{HREF}", `#/Detail/${recipe.id}`);
+            html = html.replace("{IMG}", recipe.bild);
+            html = html.replace("{NAME}", recipe.titel);
+            html = html.replace("{PORTIONS}", recipe.portionen);
+            html = html.replace("{TIME}", recipe.zubereitungszeit);
+
+            mainElement.innerHTML += html;
+        });
+
     }
 }

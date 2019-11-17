@@ -32,13 +32,19 @@
 
     <!-- Anwendung starten -->
     <script>
+        let sucheEvent = document.getElementById("sucheInput");
+        sucheEvent.addEventListener("keydown", async () => {
+          
+        });
+
+
         window.addEventListener("load", async () => {
             let pages = [{
                 url: "^/$",
                 klass: PageOverview,
             }, {
                 url: "^/Favorites",
-                //klass: PageFavorites
+                klass: PageOverview,
             },
             {
                 url: ".*",
@@ -52,6 +58,14 @@
             let modal = document.getElementById("modal");
             let close = document.getElementById("close-modal");
             let erstellen = document.getElementById("erstellen");
+            let suchen = document.getElementById("suchen");
+
+            suchen.onclick = function(){
+              let sucheInput = document.getElementById("searchInput");
+              if(sucheInput.style.display = "none"){
+                sucheInput.style.display = "inline";
+              }
+            };
 
             erstellen.onclick = function(){
                 app.setModalContent("erstellen");
@@ -94,7 +108,9 @@
         <!-- <img class="logo" src="icon.png" alt="Logo" /> -->
         <nav>
             <!-- Logo, Zurück-Button und Titel der Seite -->
-            <img class="logo" src="icon.png" alt="Logo" />
+            <a href="#">
+              <img class="logo" src="icon.png"  alt="Logo" />
+            </a>
 
             <ul class="menu-left">
                 <li class="go-back">
@@ -103,9 +119,12 @@
                         <span class="page-name">Name der Seite</span>
                     </a>
                 </li>
-                <li class="dont-go-back hidden">
-                    <span class="page-name">Name der Seite</span>
-                </li>
+                <a href="#">
+                  <li class="dont-go-back hidden">
+                      <span class="page-name">Name der Seite</span>
+                  </li>
+                </a>
+
                 <li class="toggle-menu small-screen-only">
                     <a href="#">
                         <i class="icon-menu"></i>
@@ -116,10 +135,11 @@
             <!-- Übergreifendes App-Menü -->
                 <ul class="menu-right small-screen-hidden">
                     <li>
-                        <a href="#/search">
-                            <i class="icon-search"></i>
+                        <div id="suchen">
+                            <input type="text" placeholder="Suche" id="searchInput" required="false" pattern="[a-zA-Z]+"></input>
+                            <i class="icon-search" id="menu_search"></i>
                             <span class="small-screen-only">Suchen</span>
-                        </a>
+                        </div>
                     </li>
                     <li>
                         <a href="#/Favorites">

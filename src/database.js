@@ -63,11 +63,11 @@ class Database{
     }
 
     // Gibt alle Rezepte zurück, die als Favorit gekennzeichnet wurden
-    getAllNotFavorites(){
+    getAllFavorites(){
       let rezeptliste = this._recipes;
       let favoritenliste = [];
-      for(let i = 0; i < rezeptliste.length(); i++){
-        if(!rezeptliste[i].favorit){
+      for(let i = 0; i < rezeptliste.length; i++){
+        if(rezeptliste[i].favorit){
           favoritenliste.push(rezeptliste[i]);
         }
       }

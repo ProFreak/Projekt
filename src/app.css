@@ -402,7 +402,13 @@ body .modal-container{
     max-width: 100%;
 }
 
-
+#searchInput{
+  display: none;
+  border: 1px solid gainsboro;
+  font-family: 'Quicksand', sans-serif;
+  color: black;
+  height: 2em;
+}
 
 /* Schließen-Knopf */
 .close {
@@ -441,7 +447,6 @@ body .modal-container{
     min-height: 5em;
 }
 #portionInput{
-  border: 1px solid gainsboro;
   color: black;
   margin: auto;
   margin-top: 3px;
